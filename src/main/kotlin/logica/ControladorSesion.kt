@@ -1,0 +1,4 @@
+package logica
+
+class ControladorSesion {
+}
