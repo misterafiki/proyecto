@@ -34,7 +34,7 @@ class InterfazUsuario {
         print("Contraseña: ")
         val password = readLine().orEmpty()
 
-        ControladorUsuario.registrar(email, name, lastName, age, password)
+        ControladorIndividuoRol.registrar(email, name, lastName, age, password)
         println("Usuario registrado exitosamente.")
     }
 
@@ -44,7 +44,7 @@ class InterfazUsuario {
         print("Contraseña: ")
         val password = readLine().orEmpty()
 
-        when (ControladorUsuario.login(email, password)){
+        when (ControladorIndividuoRol.login(email, password)){
             Rol.ESTANDAR -> playGame(email)
             Rol.ADMINISTRADOR -> menuAdministrador()
             Rol.AMBOS -> {
@@ -122,12 +122,12 @@ class InterfazUsuario {
         print("Clave de acceso: ")
         val claveAcceso = readLine() ?: ""
 
-        ControladorUsuario.registrar(email, nombre, apellidos, edad, claveAcceso)
+        ControladorIndividuoRol.registrar(email, nombre, apellidos, edad, claveAcceso)
         println("Usuario añadido correctamente.")
     }
 
     private fun mostrarUsuarios() {
-        val usuarios = ControladorUsuario.obtenerTodosUsuarios()
+        val usuarios = ControladorIndividuoRol.obtenerTodosUsuarios()
         println("Lista de usuarios:")
         usuarios.forEach { println(it) }
     }
@@ -135,7 +135,7 @@ class InterfazUsuario {
     private fun buscarUsuarioPorEmail() {
         print("Ingrese el email del usuario a buscar: ")
         val email = readLine() ?: ""
-        val usuario = ControladorUsuario.obtenerUsuarioPorEmail(email)
+        val usuario = ControladorIndividuoRol.obtenerUsuarioPorEmail(email)
         if (usuario != null) {
             println("Usuario encontrado: $usuario")
         } else {
@@ -146,9 +146,9 @@ class InterfazUsuario {
     private fun borrarUsuario() {
         print("Ingrese el email del usuario a borrar: ")
         val email = readLine() ?: ""
-        val usuario = ControladorUsuario.obtenerUsuarioPorEmail(email)
+        val usuario = ControladorIndividuoRol.obtenerUsuarioPorEmail(email)
         if (usuario != null) {
-            ControladorUsuario.eliminarUsuario(usuario)
+            ControladorIndividuoRol.eliminarUsuario(usuario)
             println("Usuario eliminado correctamente.")
         } else {
             println("No se encontró ningún usuario con el email proporcionado.")
@@ -158,12 +158,12 @@ class InterfazUsuario {
     private fun modificarUsuario() {
         print("Ingrese el email del usuario a modificar: ")
         val email = readLine() ?: ""
-        val usuario = ControladorUsuario.obtenerUsuarioPorEmail(email)
+        val usuario = ControladorIndividuoRol.obtenerUsuarioPorEmail(email)
         if (usuario != null) {
             print("Ingrese la nueva edad: ")
             val nuevaEdad = readLine()?.toIntOrNull() ?: 0
             usuario.edad = nuevaEdad
-            ControladorUsuario.actualizarUsuario(usuario)
+            ControladorIndividuoRol.actualizarUsuario(usuario)
             println("Edad modificada correctamente.")
         } else {
             println("No se encontró ningún usuario con el email proporcionado.")
@@ -173,11 +173,11 @@ class InterfazUsuario {
     private fun cambiarPermisosUsuario() {
         print("Ingrese el email del usuario cuyos permisos desea cambiar: ")
         val email = readLine() ?: ""
-        val usuario = ControladorUsuario.obtenerUsuarioPorEmail(email)
+        val usuario = ControladorIndividuoRol.obtenerUsuarioPorEmail(email)
         if (usuario != null) {
             print("Ingrese el nuevo rol (ESTANDAR, ADMINISTRADOR o AMBOS): ")
             val nuevoRol = readLine() ?: ""
-            ControladorUsuario.cambiarRol(email, nuevoRol)
+            ControladorIndividuoRol.cambiarRol(email, nuevoRol)
             println("Rol cambiado correctamente.")
         } else {
             println("No se encontró ningún usuario con el email proporcionado.")
