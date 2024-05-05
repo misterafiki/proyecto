@@ -1,6 +1,8 @@
 package BBDD
 
 import ConexionBD
+import Grupo
+import Metodologia
 import Terapeuta
 
 class TerapeutaDAOImpl : TerapeutaDAO {
@@ -57,8 +59,8 @@ class TerapeutaDAOImpl : TerapeutaDAO {
         ps?.setString(1, usuario.email)
         ps?.setString(2, usuario.pass)
         ps?.setString(3, usuario.nombre)
-        ps?.setInt(4, usuario.id_grupos)
-        ps?.setInt(5, usuario.id_metodologia)
+        ps?.setString(4, usuario.id_grupos.toString())
+        ps?.setString(5, usuario.id_metodologia.toString())
         val result = ps?.executeUpdate()
         ps?.close()
         conexion.desconectar()
@@ -77,17 +79,18 @@ class TerapeutaDAOImpl : TerapeutaDAO {
         return result == 1
     }
 
-    //Comprobacion de la base detos como llamar a los grupos y metdologias
+
     override fun updateGrupo(usuario: Terapeuta): Boolean {
         conexion.conectar()
         var grupaux = usuario.id_grupos
         val grupo = when (grupaux) {
-            1 -> "ESTANDAR"
-            2 -> "ADMINISTRADOR"
-            3 -> "AMBOS"
+            // llama a la enum de Grupo
+            Grupo.GRUPO1 -> "GRUPO1"
+            Grupo.GRUPO2-> "GRUPO2"
+            Grupo.GRUPO3 -> "GRUPO3"
             else -> throw IllegalArgumentException("Grupo desconocido: $grupaux")
         }
-        val query = "UPDATE usuarios SET id_grupo = ? WHERE email = ?"
+        val query = "UPDATE usuarios SET id_metodologia = ? WHERE email = ?"
         val ps = conexion.getPreparedStatement(query)
         ps?.setString(1,grupo)
         ps?.setString(2, usuario.email)
@@ -99,12 +102,13 @@ class TerapeutaDAOImpl : TerapeutaDAO {
 
     override fun updateMetodo(usuario: Terapeuta): Boolean {
         conexion.conectar()
-        var metpaux = usuario.id_grupos
+        var metpaux = usuario.id_metodologia
         val metodo = when (metpaux) {
-            1 -> "ESTANDAR"
-            2 -> "ADMINISTRADOR"
-            3 -> "AMBOS"
-            else -> throw IllegalArgumentException("Grupo desconocido: $metpaux")
+            // llama a la enum de metodologias
+             Metodologia.METO1 -> "METO1"
+             Metodologia.METO2 -> "METO2"
+             Metodologia.METO3 -> "METO3"
+            else -> throw IllegalArgumentException("Metodologia desconocido: $metpaux")
         }
         val query = "UPDATE usuarios SET id_metodologia = ? WHERE email = ?"
         val ps = conexion.getPreparedStatement(query)
