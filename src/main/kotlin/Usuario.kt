@@ -1,6 +1,7 @@
 import java.util.SimpleTimeZone
 
 class Usuario {
+    var id: Int =0
     var email: String=""
     var pass:String=""
     var nombre:String=""
@@ -8,7 +9,8 @@ class Usuario {
     var id_familia:Int=0
     var id_rol:Int=0
 
-    constructor( email: String, pass: String, nombre: String, apellidos: String, id_familia: Int, id_rol: Int) {
+    constructor(id: Int, email: String, pass: String, nombre: String, apellidos: String, id_familia: Int, id_rol: Int) {
+        this.id = id
         this.email = email
         this.pass = pass
         this.nombre = nombre
@@ -17,7 +19,8 @@ class Usuario {
         this.id_rol = id_rol
     }
 
-    constructor( email: String, nombre: String, apellidos: String, id_familia: Int, id_rol: Int) {
+    constructor(id: Int, email: String, nombre: String, apellidos: String, id_familia: Int, id_rol: Int) {
+        this.id = id
         this.email = email
         this.nombre = nombre
         this.apellidos = apellidos
@@ -27,7 +30,7 @@ class Usuario {
 
 
     override fun toString(): String {
-        return "Usuario(email='$email', nombre='$nombre', apellidos='$apellidos', id_familia=$id_familia, id_rol=$id_rol)"
+        return "Usuario(id=$id, email='$email', nombre='$nombre', apellidos='$apellidos', id_familia=$id_familia, id_rol=$id_rol)"
     }
 
 }

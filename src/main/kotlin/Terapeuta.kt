@@ -7,6 +7,7 @@ class Terapeuta {
     var id_metodologia:Int=0
 
     constructor( email: String, pass: String, nombre: String, id_grupos: Int, id_metodologia: Int) {
+        this.id = id
         this.email = email
         this.pass = pass
         this.nombre = nombre
@@ -14,7 +15,7 @@ class Terapeuta {
         this.id_metodologia = id_metodologia
     }
 
-    constructor(email: String, nombre: String, id_grupos: Int, id_metodologia: Int) {
+    constructoremail: String, nombre: String, id_grupos: Int, id_metodologia: Int) {
         this.email = email
         this.nombre = nombre
         this.id_grupos = id_grupos
