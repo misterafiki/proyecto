@@ -85,9 +85,9 @@ class TerapeutaDAOImpl : TerapeutaDAO {
         var grupaux = usuario.id_grupos
         val grupo = when (grupaux) {
             // llama a la enum de Grupo
-            Grupo.GRUPO1 -> "GRUPO1"
-            Grupo.GRUPO2-> "GRUPO2"
-            Grupo.GRUPO3 -> "GRUPO3"
+            Grupo.GRUP1 -> "GRUP1"
+            Grupo.GRUP2-> "GRUP2"
+            Grupo.GRUP3 -> "GRUP3"
             else -> throw IllegalArgumentException("Grupo desconocido: $grupaux")
         }
         val query = "UPDATE usuarios SET id_metodologia = ? WHERE email = ?"
@@ -105,9 +105,9 @@ class TerapeutaDAOImpl : TerapeutaDAO {
         var metpaux = usuario.id_metodologia
         val metodo = when (metpaux) {
             // llama a la enum de metodologias
-             Metodologia.METO1 -> "METO1"
-             Metodologia.METO2 -> "METO2"
-             Metodologia.METO3 -> "METO3"
+             Metodologia.METODO1 -> "METODO1"
+             Metodologia.METODO2 -> "METODO2"
+             Metodologia.METODO3 -> "METODO3"
             else -> throw IllegalArgumentException("Metodologia desconocido: $metpaux")
         }
         val query = "UPDATE usuarios SET id_metodologia = ? WHERE email = ?"

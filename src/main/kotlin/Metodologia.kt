@@ -1,5 +1,5 @@
 enum class Metodologia(var valor: String) {
-    METO1("METO1"),
-    METO2("METO2"),
-    METO3("METO3")
+    METODO1("METODO1"),
+    METODO2("METODO2"),
+    METODO3("METODO3")
 }
