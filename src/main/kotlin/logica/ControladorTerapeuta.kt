@@ -42,9 +42,9 @@ class ControladorTerapeuta () {
             val usuario = TerapeuraDAO.getTerapeutaByEmail(email)
             usuario?.let {
                 val grupEnum = when (nuevoGrup.uppercase(Locale.getDefault())) {
-                    "GRUPO1" -> Grupo.GRUPO1
-                    "GRUPO2" -> Grupo.GRUPO2
-                    "GRUPO3" -> Grupo.GRUPO3
+                    "GRUPO1" -> Grupo.GRUP1
+                    "GRUPO2" -> Grupo.GRUP2
+                    "GRUPO3" -> Grupo.GRUP3
                     else -> throw IllegalArgumentException("Metodologia desconocido: $nuevoGrup")
                 }
                 it.id_grupos = grupEnum
@@ -55,9 +55,9 @@ class ControladorTerapeuta () {
                 val usuario = TerapeuraDAO.getTerapeutaByEmail(email)
                 usuario?.let {
                     val metoEnum = when (nuevoMeto.uppercase(Locale.getDefault())) {
-                        "METO1" -> Metodologia.METO1
-                        "METO2" -> Metodologia.METO2
-                        "METO3" -> Metodologia.METO3
+                        "METO1" -> Metodologia.METODO1
+                        "METO2" -> Metodologia.METODO2
+                        "METO3" -> Metodologia.METODO3
                         else -> throw IllegalArgumentException("Metodologia desconocido: $nuevoMeto")
                     }
                     it.id_metodologia = metoEnum
