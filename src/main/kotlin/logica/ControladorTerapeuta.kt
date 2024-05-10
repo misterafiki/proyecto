@@ -1,6 +1,5 @@
 package logica
 import BBDD.*
-import Grupo
 import Metodologia
 import Terapeuta
 import java.util.*
@@ -42,9 +41,7 @@ class ControladorTerapeuta () {
             val usuario = TerapeuraDAO.getTerapeutaByEmail(email)
             usuario?.let {
                 val grupEnum = when (nuevoGrup.uppercase(Locale.getDefault())) {
-                    "GRUPO1" -> Grupo.GRUP1
-                    "GRUPO2" -> Grupo.GRUP2
-                    "GRUPO3" -> Grupo.GRUP3
+
                     else -> throw IllegalArgumentException("Metodologia desconocido: $nuevoGrup")
                 }
                 it.id_grupos = grupEnum
