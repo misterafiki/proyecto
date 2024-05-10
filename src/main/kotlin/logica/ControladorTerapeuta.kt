@@ -37,10 +37,10 @@ class ControladorTerapeuta () {
             return TerapeuraDAO.updateTerapeuta(usuario)
         }
 
-        fun cambiarGrupo(email: String, nuevoGrup: String) {
+        fun cambiarGrupo(email: String, nuevoGrup: Int) {
             val usuario = TerapeuraDAO.getTerapeutaByEmail(email)
-
-                TerapeuraDAO.updateGrupo(usuario,nuevoGrup)
+            usuario?.id_grupos=nuevoGrup
+                TerapeuraDAO.updateGrupo(usuario)
             }
 
             fun cambiarMetodo(email: String, nuevoMeto: String) {
