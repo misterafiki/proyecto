@@ -80,16 +80,12 @@ class TerapeutaDAOImpl : TerapeutaDAO {
     }
 
 
-    override fun updateGrupo(usuario: Terapeuta): Boolean {
+    override fun updateGrupo(usuario: Terapeuta?): Boolean {
         conexion.conectar()
-        var grupaux = usuario.id_grupos
-        val grupo = when (grupaux) {
-
-        }
-        val query = "UPDATE usuarios SET id_metodologia = ? WHERE email = ?"
+        val query = "UPDATE usuarios SET id_grupo = ? WHERE email = ?"
         val ps = conexion.getPreparedStatement(query)
-        ps?.setString(1,grupo)
-        ps?.setString(2, usuario.email)
+        ps?.setInt(1,usuario?.id_grupos!!)
+        ps?.setString(2, usuario?.email)
         val result = ps?.executeUpdate()
         ps?.close()
         conexion.desconectar()
