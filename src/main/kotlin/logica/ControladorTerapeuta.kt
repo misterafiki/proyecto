@@ -39,13 +39,8 @@ class ControladorTerapeuta () {
 
         fun cambiarGrupo(email: String, nuevoGrup: String) {
             val usuario = TerapeuraDAO.getTerapeutaByEmail(email)
-            usuario?.let {
-                val grupEnum = when (nuevoGrup.uppercase(Locale.getDefault())) {
 
-                    else -> throw IllegalArgumentException("Metodologia desconocido: $nuevoGrup")
-                }
-                it.id_grupos = grupEnum
-                TerapeuraDAO.updateGrupo(usuario)
+                TerapeuraDAO.updateGrupo(usuario,nuevoGrup)
             }
 
             fun cambiarMetodo(email: String, nuevoMeto: String) {

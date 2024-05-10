@@ -6,21 +6,23 @@ import java.util.*
 
 class ControladorGrupo {
     companion object {
+
         private val GrupoDAO = GrupoDAOImpl()
-        private fun obtenerTodogrupo(): List<Grupo> {
-            return ControladorGrupo.GrupoDAO.getAllGrupo()
+
+        fun obtenerGrupoPorId(id: Int): Grupo? {
+            return ControladorGrupo.GrupoDAO.getGrupoByid(id)
         }
 
-        fun obtenerGrupoPorId(id: String): Grupo? {
-            return ControladorGrupo.GrupoDAO.getGrupoByid(id)
+        fun obtenerTodogrupo(): List<Grupo> {
+            return ControladorGrupo.GrupoDAO.getAllGrupo()
         }
 
         fun eliminarGrupo(id: Int): Boolean {
             return ControladorGrupo.GrupoDAO.deleteGrupo(id)
         }
 
-        fun actualizarGrupo(id: Int): Boolean {
-            return ControladorGrupo.GrupoDAO.updateGrupo(id)
+        fun actualizarGrupo(grupo: Grupo): Boolean {
+            return ControladorGrupo.GrupoDAO.updateGrupo(grupo)
         }
     }
 }
