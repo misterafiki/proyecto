@@ -3,10 +3,10 @@ class Terapeuta {
     var pass:String=""
     var nombre:String=""
     //var apellidos:String=""
-    var id_grupos:Grupo=Grupo.GRUP1
+    var id_grupos:Int=1
     var id_metodologia:Metodologia=Metodologia.METODO1
 
-    constructor( email: String, pass: String, nombre: String, id_grupos: Grupo, id_metodologia: Metodologia) {
+    constructor( email: String, pass: String, nombre: String, id_grupos: Int, id_metodologia: Metodologia) {
         this.email = email
         this.pass = pass
         this.nombre = nombre
@@ -14,7 +14,7 @@ class Terapeuta {
         this.id_metodologia = id_metodologia
     }
 
-    constructor(email: String, nombre: String, id_grupos: Grupo, id_metodologia: Metodologia) {
+    constructor(email: String, nombre: String, id_grupos: Int, id_metodologia: Metodologia) {
         this.email = email
         this.nombre = nombre
         this.id_grupos = id_grupos

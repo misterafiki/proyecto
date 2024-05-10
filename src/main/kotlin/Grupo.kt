@@ -1,3 +1,9 @@
-class Grupo(id:Int=1,nombre:String="Grupo1") {
+class Grupo {
+    var id:Int
+    var nombre:String
 
+    constructor(id: Int, nombre: String) {
+        this.id = id
+        this.nombre = nombre
+    }
 }

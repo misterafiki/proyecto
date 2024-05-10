@@ -59,7 +59,7 @@ class TerapeutaDAOImpl : TerapeutaDAO {
         ps?.setString(1, usuario.email)
         ps?.setString(2, usuario.pass)
         ps?.setString(3, usuario.nombre)
-        ps?.setString(4, usuario.id_grupos.toString())
+        ps?.setInt(4, usuario.id_grupos)
         ps?.setString(5, usuario.id_metodologia.toString())
         val result = ps?.executeUpdate()
         ps?.close()
@@ -69,7 +69,7 @@ class TerapeutaDAOImpl : TerapeutaDAO {
 
     override fun updateTerapeuta(usuario: Terapeuta): Boolean {
         conexion.conectar()
-        val query = "UPDATE usuarios SET pass = ? WHERE email = ?"
+        val query = "UPDATE terapeutas SET pass = ? WHERE email = ?"
         val ps = conexion.getPreparedStatement(query)
         ps?.setString(1, usuario.pass)
         ps?.setString(2, usuario.email)
@@ -84,11 +84,7 @@ class TerapeutaDAOImpl : TerapeutaDAO {
         conexion.conectar()
         var grupaux = usuario.id_grupos
         val grupo = when (grupaux) {
-            // llama a la enum de Grupo
-            Grupo.GRUP1 -> "GRUP1"
-            Grupo.GRUP2-> "GRUP2"
-            Grupo.GRUP3 -> "GRUP3"
-            else -> throw IllegalArgumentException("Grupo desconocido: $grupaux")
+
         }
         val query = "UPDATE usuarios SET id_metodologia = ? WHERE email = ?"
         val ps = conexion.getPreparedStatement(query)
