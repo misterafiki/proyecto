@@ -5,7 +5,7 @@ class ControladorIndividuoRol() {
 
         private val usuarioDAO = IndividuoDAOImpl()
 
-        fun registrar(email: String, pass: String, nombre: String, apellidos: String, familia: String, rol: Rol) {
+        fun registrar(email: String, pass: String, nombre: String, apellidos: String, familia: Int, rol: Rol) {
             val usuarioNuevo = Individuo(email, pass, nombre, apellidos, familia, rol)
             usuarioDAO.insertIndividuo(usuarioNuevo)
         }
@@ -13,9 +13,11 @@ class ControladorIndividuoRol() {
         fun login(email: String, password: String): Rol? {
             val usuario = usuarioDAO.getIndividuoByEmail(email)
             var rol: Rol? = null
+
             if (usuario != null && usuario.pass == password) {
                 rol = usuario.rol
             }
+
             return rol
         }
 
@@ -37,6 +39,7 @@ class ControladorIndividuoRol() {
 
         fun cambiarRol(email: String, nuevoRol: String) {
             val usuario = usuarioDAO.getIndividuoByEmail(email)
+
             if (usuario != null) {
                 val rolEnum = when (nuevoRol.uppercase(Locale.getDefault())) {
                     "PADRE" -> Rol.PADRE

@@ -48,14 +48,14 @@ class InterfazUsuario {
             Rol.ESTANDAR -> playGame(email)
             Rol.ADMINISTRADOR -> menuAdministrador()
             Rol.AMBOS -> {
-                print("Por favor, como entrar ESTANDAR (1) ADMINISTRADOR (2): ")
-                val option = readLine()?.toIntOrNull()
-                when (option) {
-                    1 -> playGame(email)
-                    2 -> menuAdministrador()
-                    else -> println("Opción inválida. Por favor, seleccione nuevamente.")
-                }
+            print("Por favor, como entrar ESTANDAR (1) ADMINISTRADOR (2): ")
+            val option = readLine()?.toIntOrNull()
+            when (option) {
+                1 -> playGame(email)
+                2 -> menuAdministrador()
+                else -> println("Opción inválida. Por favor, seleccione nuevamente.")
             }
+        }
             else -> println("Email o contraseña incorrectos.")
         }
     }

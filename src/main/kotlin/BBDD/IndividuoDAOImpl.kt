@@ -6,6 +6,7 @@ class IndividuoDAOImpl : IndividuoDAO {
 
     override fun getIndividuoByEmail(email: String): Individuo? {
         var individuo: Individuo? = null
+
         try {
             conexion.conectar()
             val query = "SELECT * FROM individuo WHERE email = ?"
@@ -25,7 +26,7 @@ class IndividuoDAOImpl : IndividuoDAO {
                     rs.getString("pass"),  // Asumiendo que el pass viene de la base de datos también
                     rs.getString("nombre"),
                     rs.getString("apellidos"),
-                    rs.getString("familia"),
+                    rs.getInt("familia"),
                     rol
                 )
             }
@@ -35,12 +36,14 @@ class IndividuoDAOImpl : IndividuoDAO {
         } finally {
             conexion.desconectar()
         }
+
         return individuo
     }
 
 
     override fun getIdByEmail(email: String): Int? {
         var id: Int? = null
+
         try {
             conexion.conectar()
             val query = "SELECT id FROM individuo WHERE email = ?"
@@ -56,11 +59,13 @@ class IndividuoDAOImpl : IndividuoDAO {
         } finally {
             conexion.desconectar()
         }
+
         return id
     }
 
     override fun getAllIndividuos(): List<Individuo> {
         val individuos = mutableListOf<Individuo>()
+
         try {
             conexion.conectar()
             val query = "SELECT * FROM individuo"
@@ -79,7 +84,7 @@ class IndividuoDAOImpl : IndividuoDAO {
                         rs.getString("pass"), // Asumiendo que el pass viene de la base de datos también
                         rs.getString("nombre"),
                         rs.getString("apellidos"),
-                        rs.getString("familia"),
+                        rs.getInt("familia"),
                         rol
                     )
                 )
@@ -90,11 +95,13 @@ class IndividuoDAOImpl : IndividuoDAO {
         } finally {
             conexion.desconectar()
         }
+
         return individuos
     }
 
     override fun insertIndividuo(individuo: Individuo): Boolean {
         var result = false
+
         try {
             conexion.conectar()
             val query = "INSERT INTO individuo (email, nombre, apellidos, familia, rol) VALUES (?, ?, ?, ?, ?)"
@@ -102,7 +109,7 @@ class IndividuoDAOImpl : IndividuoDAO {
             ps?.setString(1, individuo.email)
             ps?.setString(2, individuo.nombre)
             ps?.setString(3, individuo.apellidos)
-            ps?.setString(4, individuo.familia)
+            ps?.setInt(4, individuo.familia)
             ps?.setString(5, individuo.rol.toString())
             result = ps?.executeUpdate() == 1
             ps?.close()
@@ -111,11 +118,13 @@ class IndividuoDAOImpl : IndividuoDAO {
         } finally {
             conexion.desconectar()
         }
+
         return result
     }
 
     override fun updatePassIndividuo(individuo: Individuo): Boolean {
         var result = false
+
         try {
             conexion.conectar()
             val query = "UPDATE individuo SET pass = ? WHERE email = ?"
@@ -129,11 +138,13 @@ class IndividuoDAOImpl : IndividuoDAO {
         } finally {
             conexion.desconectar()
         }
+
         return result
     }
 
     override fun updateRole(individuo: Individuo): Boolean {
         var result = false
+
         try {
             conexion.conectar()
             var rolaux = individuo.rol
@@ -154,11 +165,13 @@ class IndividuoDAOImpl : IndividuoDAO {
         } finally {
             conexion.desconectar()
         }
+
         return result
     }
 
     override fun deleteIndividuo(individuo: Individuo): Boolean {
         var result = false
+
         try {
             conexion.conectar()
             val query = "DELETE FROM individuo WHERE email = ?"
@@ -171,6 +184,26 @@ class IndividuoDAOImpl : IndividuoDAO {
         } finally {
             conexion.desconectar()
         }
+
+        return result
+    }
+
+    override fun deleteAllIndividuos(id: Int): Boolean {
+        var result = false
+
+        try {
+            conexion.conectar()
+            val query = "DELETE FROM individuo WHERE familia = ?"
+            val ps = conexion.getPreparedStatement(query)
+            ps?.setInt(1, id)
+            result = ps?.executeUpdate() == 1
+            ps?.close()
+        } catch (e: SQLException) {
+            println(e.message)
+        } finally {
+            conexion.desconectar()
+        }
+
         return result
     }
 }

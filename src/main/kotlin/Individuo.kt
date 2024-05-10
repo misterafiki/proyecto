@@ -3,10 +3,10 @@ class Individuo {
     val pass: String
     val nombre: String?
     val apellidos: String?
-    val familia: String
+    val familia: Int
     var rol: Rol
 
-    constructor(email: String, pass: String, nombre: String?, apellidos: String?, familia: String, rol: Rol) {
+    constructor(email: String, pass: String, nombre: String?, apellidos: String?, familia: Int, rol: Rol) {
         this.email = email
         this.pass = pass
         this.nombre = nombre
