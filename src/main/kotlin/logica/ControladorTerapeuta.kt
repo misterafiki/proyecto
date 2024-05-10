@@ -18,7 +18,6 @@ class ControladorTerapeuta () {
             if (usuario != null && usuario.pass == password) {
 
             }
-
         }
 
         fun obtenerTodosTerapeuras(): List<Terapeuta> {
@@ -57,5 +56,4 @@ class ControladorTerapeuta () {
                 }
             }
         }
-    }
 }
