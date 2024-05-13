@@ -84,7 +84,6 @@ class SesionDAOImpl:SesionDAO {
         }
         ps?.close()
         conexion.desconectar()
-        return sesion
-    }
+        return sesion!!
     }
 }

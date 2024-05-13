@@ -4,7 +4,7 @@ class Sesion {
     //var grupo:Grupo
     var familia:Int
     var grupo:Int
-    var emocion:Emociones
+    lateinit var emocion:Emociones
 
     /*constructor(id: Int, familia: Familia, grupo: Grupo, emociones: Emociones) {
         this.id = id
@@ -24,6 +24,12 @@ class Sesion {
         this.familia = familia
         this.grupo = grupo
         this.emocion = emocion
+    }
+
+    constructor(id: Int, familia: Int, grupo: Int, emocion: String?){
+        this.familia = familia
+        this.grupo = grupo
+        //this.emocion = emocion
     }
 
 
