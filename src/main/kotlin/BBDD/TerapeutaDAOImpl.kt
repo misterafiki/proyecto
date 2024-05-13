@@ -82,7 +82,7 @@ class TerapeutaDAOImpl : TerapeutaDAO {
 
     override fun updateGrupo(usuario: Terapeuta?): Boolean {
         conexion.conectar()
-        val query = "UPDATE usuarios SET id_grupo = ? WHERE email = ?"
+        val query = "UPDATE terapeuta SET id_grupo = ? WHERE email = ?"
         val ps = conexion.getPreparedStatement(query)
         ps?.setInt(1,usuario?.id_grupos!!)
         ps?.setString(2, usuario?.email)
@@ -102,7 +102,7 @@ class TerapeutaDAOImpl : TerapeutaDAO {
              Metodologia.METODO3 -> "METODO3"
             else -> throw IllegalArgumentException("Metodologia desconocido: $metpaux")
         }
-        val query = "UPDATE usuarios SET id_metodologia = ? WHERE email = ?"
+        val query = "UPDATE terapeuta SET id_metodologia = ? WHERE email = ?"
         val ps = conexion.getPreparedStatement(query)
         ps?.setString(1,metodo)
         ps?.setString(2, usuario.email)
