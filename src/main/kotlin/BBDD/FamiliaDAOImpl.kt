@@ -4,10 +4,20 @@ import ConexionBD
 import Familia
 import java.sql.SQLException
 
+/**
+ * Implementación de la interfaz [FamiliaDAO] que interactúa con la base de datos.
+ *
+ * @property conexion Objeto de conexión a la base de datos.
+ */
 class FamiliaDAOImpl : FamiliaDAO {
 
     private val conexion = ConexionBD()
 
+    /**
+     * Obtiene todas las familias desde la base de datos.
+     *
+     * @return Lista de objetos [Familia].
+     */
     override fun getAllFamilias(): List<Familia> {
         val familias = mutableListOf<Familia>()
 
@@ -34,6 +44,12 @@ class FamiliaDAOImpl : FamiliaDAO {
         return familias
     }
 
+    /**
+     * Inserta una nueva familia en la base de datos.
+     *
+     * @param familia Objeto [Familia] a insertar.
+     * @return `true` si la inserción fue exitosa, `false` en caso contrario.
+     */
     override fun insertFamilia(familia: Familia): Boolean {
         var result = false
 
@@ -54,6 +70,12 @@ class FamiliaDAOImpl : FamiliaDAO {
         return result
     }
 
+    /**
+     * Actualiza la descripción de una familia existente en la base de datos.
+     *
+     * @param familia Objeto [Familia] con la descripción actualizada.
+     * @return `true` si la actualización fue exitosa, `false` en caso contrario.
+     */
     override fun updateFamilia(familia: Familia): Boolean {
         var result = false
 
@@ -73,6 +95,12 @@ class FamiliaDAOImpl : FamiliaDAO {
         return result
     }
 
+    /**
+     * Elimina una familia de la base de datos.
+     *
+     * @param familia Objeto [Familia] a eliminar.
+     * @return `true` si la eliminación fue exitosa, `false` en caso contrario.
+     */
     override fun deleteFamilia(familia: Familia): Boolean {
         var result = false
 

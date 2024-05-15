@@ -1,9 +1,20 @@
 import java.sql.SQLException
 
+/**
+ * Implementación de la interfaz [IndividuoDAO] que interactúa con la base de datos.
+ *
+ * @property conexion Objeto de conexión a la base de datos.
+ */
 class IndividuoDAOImpl : IndividuoDAO {
 
     private val conexion = ConexionBD()
 
+    /**
+     * Obtiene un [Individuo] por su dirección de correo electrónico.
+     *
+     * @param email Dirección de correo electrónico del individuo.
+     * @return Objeto [Individuo] si se encuentra en la base de datos, o `null` si no existe.
+     */
     override fun getIndividuoByEmail(email: String): Individuo? {
         var individuo: Individuo? = null
 
@@ -40,7 +51,12 @@ class IndividuoDAOImpl : IndividuoDAO {
         return individuo
     }
 
-
+    /**
+     * Obtiene el ID de un [Individuo] por su dirección de correo electrónico.
+     *
+     * @param email Dirección de correo electrónico del individuo.
+     * @return ID del individuo si se encuentra en la base de datos, o `null` si no existe.
+     */
     override fun getIdByEmail(email: String): Int? {
         var id: Int? = null
 
@@ -63,6 +79,11 @@ class IndividuoDAOImpl : IndividuoDAO {
         return id
     }
 
+    /**
+     * Obtiene todos los individuos desde la base de datos.
+     *
+     * @return Lista de objetos [Individuo].
+     */
     override fun getAllIndividuos(): List<Individuo> {
         val individuos = mutableListOf<Individuo>()
 
@@ -99,6 +120,12 @@ class IndividuoDAOImpl : IndividuoDAO {
         return individuos
     }
 
+    /**
+     * Inserta un nuevo [Individuo] en la base de datos.
+     *
+     * @param individuo Objeto [Individuo] a insertar.
+     * @return `true` si la inserción fue exitosa, `false` en caso contrario.
+     */
     override fun insertIndividuo(individuo: Individuo): Boolean {
         var result = false
 
@@ -122,6 +149,12 @@ class IndividuoDAOImpl : IndividuoDAO {
         return result
     }
 
+    /**
+     * Actualiza la contraseña de un [Individuo] en la base de datos.
+     *
+     * @param individuo Objeto [Individuo] con la nueva contraseña.
+     * @return `true` si la actualización fue exitosa, `false` en caso contrario.
+     */
     override fun updatePassIndividuo(individuo: Individuo): Boolean {
         var result = false
 
@@ -142,6 +175,12 @@ class IndividuoDAOImpl : IndividuoDAO {
         return result
     }
 
+    /**
+     * Actualiza el rol de un [Individuo] en la base de datos.
+     *
+     * @param individuo Objeto [Individuo] con el nuevo rol.
+     * @return `true` si la actualización fue exitosa, `false` en caso contrario.
+     */
     override fun updateRole(individuo: Individuo): Boolean {
         var result = false
 
@@ -169,6 +208,12 @@ class IndividuoDAOImpl : IndividuoDAO {
         return result
     }
 
+    /**
+     * Elimina un [Individuo] de la base de datos.
+     *
+     * @param individuo Objeto [Individuo] a eliminar.
+     * @return `true` si la eliminación fue exitosa, `false` en caso contrario.
+     */
     override fun deleteIndividuo(individuo: Individuo): Boolean {
         var result = false
 
@@ -188,6 +233,12 @@ class IndividuoDAOImpl : IndividuoDAO {
         return result
     }
 
+    /**
+     * Elimina todos los individuos asociados a una familia de la base de datos.
+     *
+     * @param id ID de la familia cuyos individuos se eliminarán.
+     * @return `true` si la eliminación fue exitosa, `false` en caso contrario.
+     */
     override fun deleteAllIndividuos(id: Int): Boolean {
         var result = false
 
