@@ -22,7 +22,7 @@ class ControladorTerapeuta () {
         }
 
         fun obtenerTodosTerapeuras(): List<Terapeuta> {
-            return TerapeuraDAO.getAllterapeuta()
+            return TerapeuraDAO.getAllTerapeuta()
         }
 
         fun obtenerTerapeuraPorEmail(email: String): Terapeuta? {
