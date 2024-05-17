@@ -12,20 +12,16 @@ class TerapeutaDAOImplTest {
 
     private val terapeutaRepository = TerapeutaDAOImpl()
 
-    @BeforeAll
-    fun setup() {
-        // Aquí podrías inicializar la conexión y preparar datos de prueba si es necesario
-    }
 
     @BeforeEach
     fun init() {
         // Limpieza y preparación de la base de datos antes de cada prueba
         conexion.conectar()
         val statement = conexion.getStatement()
-        statement?.execute("DELETE FROM terapeutas") // Limpiar la tabla
-        statement?.execute("INSERT INTO terapeutas (email, pass, nombre, id_grupos, id_metodologia) VALUES ('terapeuta1@example.com', 'password1', 'Terapeuta Uno', 1, 'METODO1')")
-        statement?.execute("INSERT INTO terapeutas (email, pass, nombre, id_grupos, id_metodologia) VALUES ('terapeuta2@example.com', 'password2', 'Terapeuta Dos', 2, 'METODO2')")
-        statement?.execute("INSERT INTO terapeutas (email, pass, nombre, id_grupos, id_metodologia) VALUES ('terapeuta3@example.com', 'password3', 'Terapeuta Tres', 3, 'METODO3')")
+        statement?.execute("DELETE FROM terapeuta") // Limpiar la tabla
+        statement?.execute("INSERT INTO terapeuta (email, pass, nombre, grupo, metodologia) VALUES ('terapeuta1@example.com', 'password1', 'Terapeuta Uno', 1, 'METODO1')")
+        statement?.execute("INSERT INTO terapeuta (email, pass, nombre, grupo, metodologia) VALUES ('terapeuta2@example.com', 'password2', 'Terapeuta Dos', 2, 'METODO2')")
+        statement?.execute("INSERT INTO terapeuta (email, pass, nombre, grupo, metodologia) VALUES ('terapeuta3@example.com', 'password3', 'Terapeuta Tres', 3, 'METODO3')")
         statement?.close()
         conexion.desconectar()
     }
@@ -75,7 +71,7 @@ class TerapeutaDAOImplTest {
     fun updateGrupo() {
         // Arrange
         val terapeutaExistente = terapeutaRepository.getTerapeutaByEmail("terapeuta1@example.com")!!
-        terapeutaExistente.id_grupos = 10
+        terapeutaExistente.grupo = 2
 
         // Act
         val resultado = terapeutaRepository.updateGrupo(terapeutaExistente)
@@ -83,14 +79,14 @@ class TerapeutaDAOImplTest {
 
         // Assert
         assertTrue(resultado)
-        assertEquals(10, terapeutaActualizado?.id_grupos)
+        assertEquals(10, terapeutaActualizado?.grupo)
     }
 
     @Test
     fun updateMetodo() {
         // Arrange
         val terapeutaExistente = terapeutaRepository.getTerapeutaByEmail("terapeuta1@example.com")!!
-        terapeutaExistente.id_metodologia = Metodologia.METODO2
+        terapeutaExistente.metodologia = Metodologia.METODO2
 
         // Act
         val resultado = terapeutaRepository.updateMetodo(terapeutaExistente)
@@ -98,7 +94,7 @@ class TerapeutaDAOImplTest {
 
         // Assert
         assertTrue(resultado)
-        assertEquals(Metodologia.METODO2, terapeutaActualizado?.id_metodologia)
+        assertEquals(Metodologia.METODO2, terapeutaActualizado?.metodologia)
     }
 
     @Test
