@@ -1,27 +1,16 @@
 package BBDD
 
 import ConexionBD
+import Grupo
 import Metodologia
 import Terapeuta
 
-/**
- * Terapeuta d a o impl
- *
- * @constructor Create empty Terapeuta d a o impl
- */
 class TerapeutaDAOImpl : TerapeutaDAO {
 
     private val conexion = ConexionBD()
-
-    /**
-     * Get terapeuta by email
-     *
-     * @param email
-     * @return
-     */
     override fun getTerapeutaByEmail(email: String): Terapeuta? {
         conexion.conectar()
-        val query = "SELECT * FROM terapeuta WHERE email = ?"
+        val query = "SELECT * FROM usuarios WHERE email = ?"
         val ps = conexion.getPreparedStatement(query)
         ps?.setString(1, email)
         val rs = ps?.executeQuery()
@@ -34,15 +23,9 @@ class TerapeutaDAOImpl : TerapeutaDAO {
         return usuario
     }
 
-    /**
-     * Get id by email
-     *
-     * @param email
-     * @return
-     */
     override fun getIdByEmail(email: String): Int? {
         conexion.conectar()
-        val query = "SELECT * FROM terapeuta WHERE email = ?"
+        val query = "SELECT * FROM terapeutas WHERE email = ?"
         val ps = conexion.getPreparedStatement(query)
         ps?.setString(1, email)
         val rs = ps?.executeQuery()
@@ -55,14 +38,9 @@ class TerapeutaDAOImpl : TerapeutaDAO {
         return id
     }
 
-    /**
-     * Get all terapeutas
-     *
-     * @return
-     */
     override fun getAllTerapeutas(): List<Terapeuta> {
         conexion.conectar()
-        val query = "SELECT * FROM terapeuta"
+        val query = "SELECT * FROM terapeutas"
         val st = conexion.getStatement()
         val rs = st?.executeQuery(query)
         val usuario = arrayListOf<Terapeuta>()
@@ -74,36 +52,24 @@ class TerapeutaDAOImpl : TerapeutaDAO {
         return usuario
     }
 
-    /**
-     * Insert terapeuta
-     *
-     * @param usuario
-     * @return
-     */
     override fun insertTerapeuta(usuario: Terapeuta): Boolean {
         conexion.conectar()
-        val query = "INSERT INTO terapeuta (email,pass, nombre,grupo,metodologia ) VALUES (?,?,?,?,?)"
+        val query = "INSERT INTO terapeutas (email,pass, nombre,id_grupos,id_metodologia ) VALUES (?,?,?,?,?)"
         val ps = conexion.getPreparedStatement(query)
         ps?.setString(1, usuario.email)
         ps?.setString(2, usuario.pass)
         ps?.setString(3, usuario.nombre)
-        ps?.setInt(4, usuario.grupo)
-        ps?.setString(5, usuario.metodologia.toString())
+        ps?.setString(4, usuario.id_grupos.toString())
+        ps?.setString(5, usuario.id_metodologia.toString())
         val result = ps?.executeUpdate()
         ps?.close()
         conexion.desconectar()
         return result == 1
     }
 
-    /**
-     * Update terapeuta
-     *
-     * @param usuario
-     * @return
-     */
     override fun updateTerapeuta(usuario: Terapeuta): Boolean {
         conexion.conectar()
-        val query = "UPDATE terapeuta SET pass = ? WHERE email = ?"
+        val query = "UPDATE usuarios SET pass = ? WHERE email = ?"
         val ps = conexion.getPreparedStatement(query)
         ps?.setString(1, usuario.pass)
         ps?.setString(2, usuario.email)
@@ -114,33 +80,29 @@ class TerapeutaDAOImpl : TerapeutaDAO {
     }
 
 
-    /**
-     * Update grupo
-     *
-     * @param usuario
-     * @return
-     */
-    override fun updateGrupo(usuario: Terapeuta?): Boolean {
+    override fun updateGrupo(usuario: Terapeuta): Boolean {
         conexion.conectar()
-        val query = "UPDATE terapeuta SET grupo = ? WHERE email = ?"
+        var grupaux = usuario.id_grupos
+        val grupo = when (grupaux) {
+            // llama a la enum de Grupo
+            Grupo.GRUP1 -> "GRUP1"
+            Grupo.GRUP2-> "GRUP2"
+            Grupo.GRUP3 -> "GRUP3"
+            else -> throw IllegalArgumentException("Grupo desconocido: $grupaux")
+        }
+        val query = "UPDATE usuarios SET id_metodologia = ? WHERE email = ?"
         val ps = conexion.getPreparedStatement(query)
-        ps?.setInt(1,usuario?.grupo!!)
-        ps?.setString(2, usuario?.email)
+        ps?.setString(1,grupo)
+        ps?.setString(2, usuario.email)
         val result = ps?.executeUpdate()
         ps?.close()
         conexion.desconectar()
         return result == 1
     }
 
-    /**
-     * Update metodo
-     *
-     * @param usuario
-     * @return
-     */
     override fun updateMetodo(usuario: Terapeuta): Boolean {
         conexion.conectar()
-        var metpaux = usuario.metodologia
+        var metpaux = usuario.id_metodologia
         val metodo = when (metpaux) {
             // llama a la enum de metodologias
              Metodologia.METODO1 -> "METODO1"
@@ -148,7 +110,7 @@ class TerapeutaDAOImpl : TerapeutaDAO {
              Metodologia.METODO3 -> "METODO3"
             else -> throw IllegalArgumentException("Metodologia desconocido: $metpaux")
         }
-        val query = "UPDATE terapeuta SET metodologia = ? WHERE email = ?"
+        val query = "UPDATE usuarios SET id_metodologia = ? WHERE email = ?"
         val ps = conexion.getPreparedStatement(query)
         ps?.setString(1,metodo)
         ps?.setString(2, usuario.email)
@@ -158,15 +120,9 @@ class TerapeutaDAOImpl : TerapeutaDAO {
         return result == 1
     }
 
-    /**
-     * Delete terapeuta
-     *
-     * @param usuario
-     * @return
-     */
     override fun deleteTerapeuta(usuario: Terapeuta): Boolean {
         conexion.conectar()
-        val query = "DELETE FROM terapeuta WHERE email = ?"
+        val query = "DELETE FROM terapeutas WHERE email = ?"
         val ps = conexion.getPreparedStatement(query)
         ps?.setString(1, usuario.email)
         val result = ps?.executeUpdate()

@@ -3,22 +3,22 @@ class Terapeuta {
     var pass:String=""
     var nombre:String=""
     //var apellidos:String=""
-    var grupo:Int=1
-    var metodologia:Metodologia=Metodologia.METODO1
+    var id_grupos:Grupo=Grupo.GRUP1
+    var id_metodologia:Metodologia=Metodologia.METODO1
 
-    constructor( email: String, pass: String, nombre: String, grupo: Int, metodologia: Metodologia) {
+    constructor( email: String, pass: String, nombre: String, id_grupos: Grupo, id_metodologia: Metodologia) {
         this.email = email
         this.pass = pass
         this.nombre = nombre
-        this.grupo = grupo
-        this.metodologia = metodologia
+        this.id_grupos = id_grupos
+        this.id_metodologia = id_metodologia
     }
 
-    constructor(email: String, nombre: String, grupo: Int, metodologia: Metodologia) {
+    constructor(email: String, nombre: String, id_grupos: Grupo, id_metodologia: Metodologia) {
         this.email = email
         this.nombre = nombre
-        this.grupo = grupo
-        this.metodologia = metodologia
+        this.id_grupos = id_grupos
+        this.id_metodologia = id_metodologia
     }
 
     constructor(email: String, pass: String, nombre: String) {
@@ -28,7 +28,7 @@ class Terapeuta {
     }
 
     override fun toString(): String {
-        return "Terapeuta( email='$email', nombre='$nombre', grupo=$grupo, metodologia=$metodologia)"
+        return "Terapeuta( email='$email', nombre='$nombre', id_grupos=$id_grupos, id_metodologia=$id_metodologia)"
     }
 
 

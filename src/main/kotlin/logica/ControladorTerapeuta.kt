@@ -1,5 +1,6 @@
 package logica
 import BBDD.*
+import Grupo
 import Metodologia
 import Terapeuta
 import java.util.*
@@ -18,6 +19,7 @@ class ControladorTerapeuta () {
             if (usuario != null && usuario.pass == password) {
 
             }
+
         }
 
         fun obtenerTodosTerapeuras(): List<Terapeuta> {
@@ -36,9 +38,16 @@ class ControladorTerapeuta () {
             return TerapeuraDAO.updateTerapeuta(usuario)
         }
 
-        fun cambiarGrupo(email: String, nuevoGrup: Int) {
+        fun cambiarGrupo(email: String, nuevoGrup: String) {
             val usuario = TerapeuraDAO.getTerapeutaByEmail(email)
-            usuario?.grupo=nuevoGrup
+            usuario?.let {
+                val grupEnum = when (nuevoGrup.uppercase(Locale.getDefault())) {
+                    "GRUPO1" -> Grupo.GRUPO1
+                    "GRUPO2" -> Grupo.GRUPO2
+                    "GRUPO3" -> Grupo.GRUPO3
+                    else -> throw IllegalArgumentException("Metodologia desconocido: $nuevoGrup")
+                }
+                it.id_grupos = grupEnum
                 TerapeuraDAO.updateGrupo(usuario)
             }
 
@@ -46,14 +55,15 @@ class ControladorTerapeuta () {
                 val usuario = TerapeuraDAO.getTerapeutaByEmail(email)
                 usuario?.let {
                     val metoEnum = when (nuevoMeto.uppercase(Locale.getDefault())) {
-                        "METO1" -> Metodologia.METODO1
-                        "METO2" -> Metodologia.METODO2
-                        "METO3" -> Metodologia.METODO3
+                        "METO1" -> Metodologia.METO1
+                        "METO2" -> Metodologia.METO2
+                        "METO3" -> Metodologia.METO3
                         else -> throw IllegalArgumentException("Metodologia desconocido: $nuevoMeto")
                     }
-                    it.metodologia = metoEnum
+                    it.id_metodologia = metoEnum
                     TerapeuraDAO.updateMetodo(usuario)
                 }
             }
         }
+    }
 }
