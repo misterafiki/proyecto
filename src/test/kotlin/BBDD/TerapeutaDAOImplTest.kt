@@ -41,7 +41,7 @@ class TerapeutaDAOImplTest {
     @Test
     fun getAllTerapeutas() {
         // Act
-        val terapeutas = terapeutaRepository.getAllTerapeutas()
+        val terapeutas = terapeutaRepository.getAllTerapeuta()
 
         // Assert
         assertEquals(3, terapeutas.size) // Suponiendo que esperamos 3 terapeutas en la base de datos

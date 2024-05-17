@@ -60,7 +60,7 @@ class TerapeutaDAOImpl : TerapeutaDAO {
      *
      * @return
      */
-    override fun getAllterapeuta(): List<Terapeuta> {
+    override fun getAllTerapeuta(): List<Terapeuta> {
         conexion.conectar()
         val query = "SELECT * FROM terapeuta"
         val st = conexion.getStatement()
