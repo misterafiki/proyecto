@@ -1,8 +1,20 @@
 package BBDD
 import ConexionBD
 import Grupo
+
+/**
+ * Grupo d a o impl
+ *
+ * @constructor Create empty Grupo d a o impl
+ */
 class GrupoDAOImpl:GrupoDAO {
     private val conexion=ConexionBD()
+
+    /**
+     * Get all grupo
+     *
+     * @return
+     */
     override fun getAllGrupo(): List<Grupo> {
         conexion.conectar()
         val query = "SELECT * FROM grupos"
@@ -17,6 +29,12 @@ class GrupoDAOImpl:GrupoDAO {
         return grupo
     }
 
+    /**
+     * Get grupo byid
+     *
+     * @param id
+     * @return
+     */
     override fun getGrupoByid(id: Int): Grupo? {
         conexion.conectar()
         val query = "SELECT * FROM grupos WHERE id = ?"
@@ -32,6 +50,12 @@ class GrupoDAOImpl:GrupoDAO {
         return grupo
     }
 
+    /**
+     * Insert grupo
+     *
+     * @param grupo
+     * @return
+     */
     override fun insertGrupo(grupo: Grupo): Boolean {
         conexion.conectar()
         val query = "INSERT INTO grupo (id,nombre ) VALUES (?,?)"
@@ -44,6 +68,12 @@ class GrupoDAOImpl:GrupoDAO {
         return result == 1
     }
 
+    /**
+     * Update grupo
+     *
+     * @param grupo
+     * @return
+     */
     override fun updateGrupo(grupo: Grupo): Boolean {
         conexion.conectar()
         val query = "UPDATE grupos SET nombre = ? WHERE id = ?"
@@ -56,6 +86,12 @@ class GrupoDAOImpl:GrupoDAO {
         return result == 1
     }
 
+    /**
+     * Delete grupo
+     *
+     * @param id
+     * @return
+     */
     override fun deleteGrupo(id: Int): Boolean {
         conexion.conectar()
         val query = "DELETE FROM grupos WHERE id = ?"
