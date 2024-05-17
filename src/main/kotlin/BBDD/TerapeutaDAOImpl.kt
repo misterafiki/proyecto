@@ -1,13 +1,24 @@
 package BBDD
 
 import ConexionBD
-import Grupo
 import Metodologia
 import Terapeuta
 
+/**
+ * Terapeuta d a o impl
+ *
+ * @constructor Create empty Terapeuta d a o impl
+ */
 class TerapeutaDAOImpl : TerapeutaDAO {
 
     private val conexion = ConexionBD()
+
+    /**
+     * Get terapeuta by email
+     *
+     * @param email
+     * @return
+     */
     override fun getTerapeutaByEmail(email: String): Terapeuta? {
         conexion.conectar()
         val query = "SELECT * FROM usuarios WHERE email = ?"
@@ -23,6 +34,12 @@ class TerapeutaDAOImpl : TerapeutaDAO {
         return usuario
     }
 
+    /**
+     * Get id by email
+     *
+     * @param email
+     * @return
+     */
     override fun getIdByEmail(email: String): Int? {
         conexion.conectar()
         val query = "SELECT * FROM terapeutas WHERE email = ?"
@@ -38,6 +55,11 @@ class TerapeutaDAOImpl : TerapeutaDAO {
         return id
     }
 
+    /**
+     * Get all terapeutas
+     *
+     * @return
+     */
     override fun getAllTerapeutas(): List<Terapeuta> {
         conexion.conectar()
         val query = "SELECT * FROM terapeutas"
@@ -52,6 +74,12 @@ class TerapeutaDAOImpl : TerapeutaDAO {
         return usuario
     }
 
+    /**
+     * Insert terapeuta
+     *
+     * @param usuario
+     * @return
+     */
     override fun insertTerapeuta(usuario: Terapeuta): Boolean {
         conexion.conectar()
         val query = "INSERT INTO terapeutas (email,pass, nombre,id_grupos,id_metodologia ) VALUES (?,?,?,?,?)"
@@ -67,6 +95,12 @@ class TerapeutaDAOImpl : TerapeutaDAO {
         return result == 1
     }
 
+    /**
+     * Update terapeuta
+     *
+     * @param usuario
+     * @return
+     */
     override fun updateTerapeuta(usuario: Terapeuta): Boolean {
         conexion.conectar()
         val query = "UPDATE terapeutas SET pass = ? WHERE email = ?"
@@ -80,6 +114,12 @@ class TerapeutaDAOImpl : TerapeutaDAO {
     }
 
 
+    /**
+     * Update grupo
+     *
+     * @param usuario
+     * @return
+     */
     override fun updateGrupo(usuario: Terapeuta?): Boolean {
         conexion.conectar()
         val query = "UPDATE terapeuta SET id_grupo = ? WHERE email = ?"
@@ -92,6 +132,12 @@ class TerapeutaDAOImpl : TerapeutaDAO {
         return result == 1
     }
 
+    /**
+     * Update metodo
+     *
+     * @param usuario
+     * @return
+     */
     override fun updateMetodo(usuario: Terapeuta): Boolean {
         conexion.conectar()
         var metpaux = usuario.id_metodologia
@@ -112,6 +158,12 @@ class TerapeutaDAOImpl : TerapeutaDAO {
         return result == 1
     }
 
+    /**
+     * Delete terapeuta
+     *
+     * @param usuario
+     * @return
+     */
     override fun deleteTerapeuta(usuario: Terapeuta): Boolean {
         conexion.conectar()
         val query = "DELETE FROM terapeutas WHERE email = ?"
