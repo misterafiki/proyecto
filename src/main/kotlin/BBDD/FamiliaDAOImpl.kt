@@ -3,8 +3,19 @@ package BBDD
 import ConexionBD
 import Familia
 
+/**
+ * Familia d a o impl
+ *
+ * @constructor Create empty Familia d a o impl
+ */
 class FamiliaDAOImpl:FamiliaDAO {
     private val conexion = ConexionBD()
+
+    /**
+     * Get all familias
+     *
+     * @return
+     */
     override fun getAllFamilias(): List<Familia> {
         conexion.conectar()
         val query = "SELECT * FROM familia"
@@ -19,6 +30,12 @@ class FamiliaDAOImpl:FamiliaDAO {
         return familia
     }
 
+    /**
+     * Insert familia
+     *
+     * @param familia
+     * @return
+     */
     override fun insertFamilia(familia: Familia): Boolean {
         conexion.conectar()
         val query = "INSERT INTO familia (descripcion ) VALUES (?)"
@@ -30,6 +47,12 @@ class FamiliaDAOImpl:FamiliaDAO {
         return result == 1
     }
 
+    /**
+     * Update familia
+     *
+     * @param familia
+     * @return
+     */
     override fun updateFamilia(familia: Familia): Boolean {
         conexion.conectar()
         val query = "UPDATE familia SET descipcion = ? WHERE id = ?"
@@ -42,6 +65,12 @@ class FamiliaDAOImpl:FamiliaDAO {
         return result == 1
     }
 
+    /**
+     * Delete familia
+     *
+     * @param familia
+     * @return
+     */
     override fun deleteFamilia(familia: Familia): Boolean {
         conexion.conectar()
         val query = "DELETE FROM familia WHERE id = ?"
