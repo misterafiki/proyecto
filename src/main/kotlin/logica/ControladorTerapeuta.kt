@@ -22,7 +22,7 @@ class ControladorTerapeuta () {
         }
 
         fun obtenerTodosTerapeuras(): List<Terapeuta> {
-            return TerapeuraDAO.getAllTerapeutas()
+            return TerapeuraDAO.getAllterapeuta()
         }
 
         fun obtenerTerapeuraPorEmail(email: String): Terapeuta? {
@@ -37,16 +37,9 @@ class ControladorTerapeuta () {
             return TerapeuraDAO.updateTerapeuta(usuario)
         }
 
-        fun cambiarGrupo(email: String, nuevoGrup: String) {
+        fun cambiarGrupo(email: String, nuevoGrup: Int) {
             val usuario = TerapeuraDAO.getTerapeutaByEmail(email)
-            usuario?.let {
-                val grupEnum = when (nuevoGrup.uppercase(Locale.getDefault())) {
-                    "GRUPO1" -> Grupo.GRUPO1
-                    "GRUPO2" -> Grupo.GRUPO2
-                    "GRUPO3" -> Grupo.GRUPO3
-                    else -> throw IllegalArgumentException("Metodologia desconocido: $nuevoGrup")
-                }
-                it.id_grupos = grupEnum
+                usuario?.grupo=nuevoGrup
                 TerapeuraDAO.updateGrupo(usuario)
             }
 
@@ -54,12 +47,12 @@ class ControladorTerapeuta () {
                 val usuario = TerapeuraDAO.getTerapeutaByEmail(email)
                 usuario?.let {
                     val metoEnum = when (nuevoMeto.uppercase(Locale.getDefault())) {
-                        "METO1" -> Metodologia.METO1
-                        "METO2" -> Metodologia.METO2
-                        "METO3" -> Metodologia.METO3
+                        "METO1" -> Metodologia.METODO1
+                        "METO2" -> Metodologia.METODO2
+                        "METO3" -> Metodologia.METODO3
                         else -> throw IllegalArgumentException("Metodologia desconocido: $nuevoMeto")
                     }
-                    it.id_metodologia = metoEnum
+                    it.metodologia = metoEnum
                     TerapeuraDAO.updateMetodo(usuario)
                 }
             }
