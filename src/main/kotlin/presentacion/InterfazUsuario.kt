@@ -168,6 +168,7 @@ private fun registrar(){
 
     ControladorIndividuoRol.registrar(email, pass, nombre, apellidos, familia, rol)
     println("Usuario registrado exitosamente.")
+
 }
 
 /**
@@ -220,8 +221,7 @@ private fun login() {
  */
 private fun aniadirIndividuo() {
     println("Ingrese los datos del usuario, terapeutilla de los cojones:")
-    print("Email: ")
-    val email = readLine() ?: ""
+    val email = pedirMail()
     print("Contraseña: ")
     val pass = readLine() ?: ""
     print("Nombre: ")
@@ -236,6 +236,13 @@ private fun aniadirIndividuo() {
     ControladorIndividuoRol.registrar(email, pass, nombre, apellidos, familia, rol)
     println("Terapeuta registrado exitosamente.")
 }
+
+private fun pedirMail(): String {
+    print("Email: ")
+    val email = readLine() ?: ""
+    return email
+}
+
 /**
  * Muestra la lista de todos los individuos en el sistema.
  * Obtiene la lista desde el controlador y la imprime en la consola.
@@ -427,7 +434,6 @@ private fun modificarMetodoTerapeuta(){
  * Si no se encuentra, muestra un mensaje de error.
  */
 private fun eliminarTerapeuta(){
-    print("Ingrese el email del usuario a borrar: ")
     print("Ingrese el email del terapeuta a buscar: ")
     val email = readLine() ?: ""
     val terapeuta = ControladorTerapeuta.obtenerTerapeuraPorEmail(email)
