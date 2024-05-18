@@ -3,120 +3,121 @@ import logica.ControladorTerapeuta
 
 class InterfazUsuario{
 
-    fun menuInicio() {
-        var seguir = true
-        while (seguir) {
-            println(
-                "[1] Login\n" +
-                        "[2] Registrarse\n" +
-                        "[3] Registrar Terapeuta" +
-                        "[4] Salir"
-            )
+    companion object {
+        fun menuInicio() {
+            var seguir = true
+            while (seguir) {
+                println(
+                    "[1] Login\n" +
+                            "[2] Registrarse\n" +
+                            "[3] Registrar Terapeuta" +
+                            "[4] Salir"
+                )
 
-            val option = readLine()?.toIntOrNull()
+                val option = readLine()?.toIntOrNull()
 
-            when (option) {
-                1 -> login() //si login de usuario, menu usuario, si terapeuta o equivocado
-                2 -> registrar()
-                3 -> registrarTerapeuta()
-                4 -> {
-                    println("Saliendo del sistema")
-                    seguir = false
-                }
+                when (option) {
+                    1 -> login() //si login de usuario, menu usuario, si terapeuta o equivocado
+                    2 -> registrar()
+                    3 -> registrarTerapeuta()
+                    4 -> {
+                        println("Saliendo del sistema")
+                        seguir = false
+                    }
 
-                else -> println("Inserte una opción válida")
-            }
-        }
-    }
-
-
-    fun menuUsuario() {
-
-        println(
-            "[1] Modicar pass del individuo\n" +
-                    "[2] Modificar Rol del usuario\n" +
-                    "[3] Borrar individuo\n" +
-                    "[4] Volver a menu anterior"
-        )
-        val option = readlnOrNull()?.toIntOrNull()
-
-        when (option) {
-            1 -> modificarPassIndividuo()
-            2 -> modificarRolIndividuo()
-            3 -> borrarIndividuo()
-            4 -> menuInicio()
-            else -> menuUsuario()
-
-        }
-    }
-
-    fun menuTerapeuta() {
-
-        println(
-            "[1] Añadir individuo\n" +
-                    "[2] Modicar individuo\n" +
-                    "[3] Borrar individuo\n" +
-                    "[4] Mostrar usuarios\n" +
-                    "[5] Buscar usuario por email\n" +
-                    "[6] Añadir familia\n" +
-                    "[7] Añadir individuo a familia\n" +
-                    "[8] Modificar descripción familiar\n" +
-                    "[9] Administrar terapeutas\n" +
-                    "[0] Volver a menu anterior"
-        )
-        val option = readlnOrNull()?.toIntOrNull()
-
-        when (option) {
-            1 -> aniadirIndividuo()
-            2 -> modificarPassIndividuo()
-            3 -> borrarIndividuo()
-            4 -> mostrarUsuarios()
-            5 -> buscarUsuarioPorEmail()
-            6 -> registrarFamilia()
-            7 -> mostrarFamilias()
-            8 -> modificarFamilia()
-            9 -> borrarFamilia()
-            10 -> menuAdministrarTerapeutas()
-            11 -> menuInicio()
-            else -> menuTerapeuta()
-
-        }
-    }
-
-    fun menuAdministrarTerapeutas() {
-        var seguir = true
-        while (seguir) {
-            println(
-                "[1] Añadir terapeuta\n" +
-                        "[2] Modificar terapeuta\n" +
-                        "[3] Eliminar terapeuta\n" +
-                        "[4] Mostrar terapeutas\n" +
-                        "[5] Buscar por email\n" +
-                        "[6] Volver a menu anterior" +
-                        "[7] Salir"
-            )
-            val option = readLine()?.toIntOrNull()
-
-            when (option) {
-                1 -> aniadirTerapeuta()
-                2 -> modificarGrupoTerapeuta()
-                3 -> eliminarTerapeuta()
-                4 -> mostrarTerapeutas()
-                5 -> buscarTerapeutaPorEmail()
-                6 -> menuTerapeuta()
-                7 -> {
-                    println("Saliendo del sistema")
-                    seguir = false
-                }
-
-                else -> {
-                    println("Elige bien")
-                    menuAdministrarTerapeutas()
+                    else -> println("Inserte una opción válida")
                 }
             }
         }
-    }
 
+
+        fun menuUsuario() {
+
+            println(
+                "[1] Modicar pass del individuo\n" +
+                        "[2] Modificar Rol del usuario\n" +
+                        "[3] Borrar individuo\n" +
+                        "[4] Volver a menu anterior"
+            )
+            val option = readlnOrNull()?.toIntOrNull()
+
+            when (option) {
+                1 -> modificarPassIndividuo()
+                2 -> modificarRolIndividuo()
+                3 -> borrarIndividuo()
+                4 -> menuInicio()
+                else -> menuUsuario()
+
+            }
+        }
+
+        fun menuTerapeuta() {
+
+            println(
+                "[1] Añadir individuo\n" +
+                        "[2] Modicar individuo\n" +
+                        "[3] Borrar individuo\n" +
+                        "[4] Mostrar usuarios\n" +
+                        "[5] Buscar usuario por email\n" +
+                        "[6] Añadir familia\n" +
+                        "[7] Añadir individuo a familia\n" +
+                        "[8] Modificar descripción familiar\n" +
+                        "[9] Administrar terapeutas\n" +
+                        "[0] Volver a menu anterior"
+            )
+            val option = readlnOrNull()?.toIntOrNull()
+
+            when (option) {
+                1 -> aniadirIndividuo()
+                2 -> modificarPassIndividuo()
+                3 -> borrarIndividuo()
+                4 -> mostrarUsuarios()
+                5 -> buscarUsuarioPorEmail()
+                6 -> registrarFamilia()
+                7 -> mostrarFamilias()
+                8 -> modificarFamilia()
+                9 -> borrarFamilia()
+                10 -> menuAdministrarTerapeutas()
+                11 -> menuInicio()
+                else -> menuTerapeuta()
+
+            }
+        }
+
+        fun menuAdministrarTerapeutas() {
+            var seguir = true
+            while (seguir) {
+                println(
+                    "[1] Añadir terapeuta\n" +
+                            "[2] Modificar terapeuta\n" +
+                            "[3] Eliminar terapeuta\n" +
+                            "[4] Mostrar terapeutas\n" +
+                            "[5] Buscar por email\n" +
+                            "[6] Volver a menu anterior" +
+                            "[7] Salir"
+                )
+                val option = readLine()?.toIntOrNull()
+
+                when (option) {
+                    1 -> aniadirTerapeuta()
+                    2 -> modificarGrupoTerapeuta()
+                    3 -> eliminarTerapeuta()
+                    4 -> mostrarTerapeutas()
+                    5 -> buscarTerapeutaPorEmail()
+                    6 -> menuTerapeuta()
+                    7 -> {
+                        println("Saliendo del sistema")
+                        seguir = false
+                    }
+
+                    else -> {
+                        println("Elige bien")
+                        menuAdministrarTerapeutas()
+                    }
+                }
+            }
+        }
+    }
 
 }
 
@@ -158,17 +159,16 @@ private fun registrarTerapeuta(){
 }
 
 private fun login() {
-    var menu = InterfazUsuario()
     print("Email: ")
     val email = readLine().orEmpty()
     print("Contraseña: ")
     val password = readLine().orEmpty()
 
-    if (ControladorIndividuoRol.login(email, password)){
-        menu.menuUsuario()
+    if (ControladorUsuario.login(email, password)){
+        if (Rol != null) InterfazUsuario.menuUsuario()
     }
     else if (ControladorTerapeuta.login(email,password)){
-        menu.menuTerapeuta()
+        InterfazUsuario.menuTerapeuta()
     }
     else println("Email o contraseña incorrectos.")
 }
@@ -192,7 +192,6 @@ private fun aniadirIndividuo() {
 
     ControladorIndividuoRol.registrar(email, pass, nombre, apellidos, familia, rol)
     println("Terapeuta registrado exitosamente.")
-
 }
 
 private fun mostrarUsuarios() {
