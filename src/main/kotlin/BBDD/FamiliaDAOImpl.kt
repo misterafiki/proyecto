@@ -2,84 +2,121 @@ package BBDD
 
 import ConexionBD
 import Familia
+import java.sql.SQLException
 
 /**
- * Familia d a o impl
+ * Implementación de la interfaz [FamiliaDAO] que interactúa con la base de datos.
  *
- * @constructor Create empty Familia d a o impl
+ * @property conexion Objeto de conexión a la base de datos.
  */
-class FamiliaDAOImpl:FamiliaDAO {
+class FamiliaDAOImpl : FamiliaDAO {
+
     private val conexion = ConexionBD()
 
     /**
-     * Get all familias
+     * Obtiene todas las familias desde la base de datos.
      *
-     * @return
+     * @return Lista de objetos [Familia].
      */
     override fun getAllFamilias(): List<Familia> {
-        conexion.conectar()
-        val query = "SELECT * FROM familia"
-        val st = conexion.getStatement()
-        val rs = st?.executeQuery(query)
-        val familia = arrayListOf<Familia>()
-        while (rs?.next() == true) {
-            familia.add(Familia(rs.getInt("id"), rs.getString("descripcion") ))
+        val familias = mutableListOf<Familia>()
+
+        try {
+            conexion.conectar()
+            val query = "SELECT * FROM familia"
+            val ps = conexion.getPreparedStatement(query)
+            val rs = ps?.executeQuery()
+            while (rs?.next() == true) {
+                familias.add(
+                    Familia(
+                        rs.getInt("id"),
+                        rs.getString("descripcion")
+                    )
+                )
+            }
+            ps?.close()
+        } catch (e: SQLException) {
+            println(e.message)
+        } finally {
+            conexion.desconectar()
         }
-        st?.close()
-        conexion.desconectar()
-        return familia
+
+        return familias
     }
 
     /**
-     * Insert familia
+     * Inserta una nueva familia en la base de datos.
      *
-     * @param familia
-     * @return
+     * @param familia Objeto [Familia] a insertar.
+     * @return `true` si la inserción fue exitosa, `false` en caso contrario.
      */
     override fun insertFamilia(familia: Familia): Boolean {
-        conexion.conectar()
-        val query = "INSERT INTO familia (descripcion ) VALUES (?)"
-        val ps = conexion.getPreparedStatement(query)
-        ps?.setString(1, familia.descripcion)
-        val result = ps?.executeUpdate()
-        ps?.close()
-        conexion.desconectar()
-        return result == 1
+        var result = false
+
+        try {
+            conexion.conectar()
+            val query = "INSERT INTO familia (id, descripcion) VALUES (?, ?)"
+            val ps = conexion.getPreparedStatement(query)
+            ps?.setInt(1, familia.id)
+            ps?.setString(2, familia.descripcion)
+            result = ps?.executeUpdate() == 1
+            ps?.close()
+        } catch (e: SQLException) {
+            println(e.message)
+        } finally {
+            conexion.desconectar()
+        }
+
+        return result
     }
 
     /**
-     * Update familia
+     * Actualiza la descripción de una familia existente en la base de datos.
      *
-     * @param familia
-     * @return
+     * @param familia Objeto [Familia] con la descripción actualizada.
+     * @return `true` si la actualización fue exitosa, `false` en caso contrario.
      */
     override fun updateFamilia(familia: Familia): Boolean {
+        var result = false
+
         conexion.conectar()
-        val query = "UPDATE familia SET descipcion = ? WHERE id = ?"
-        val ps = conexion.getPreparedStatement(query)
-        ps?.setString(1, familia.descripcion)
-        ps?.setInt(2, familia.id)
-        val result = ps?.executeUpdate()
-        ps?.close()
-        conexion.desconectar()
-        return result == 1
+        try {
+            val query = "UPDATE familia SET descripcion = ? WHERE id = ?"
+            val ps = conexion.getPreparedStatement(query)
+            ps?.setString(1, familia.descripcion)
+            ps?.setInt(2, familia.id)
+            result = ps?.executeUpdate() == 1
+        } catch (e: SQLException) {
+            println(e.message)
+        } finally {
+            conexion.desconectar()
+        }
+
+        return result
     }
 
     /**
-     * Delete familia
+     * Elimina una familia de la base de datos.
      *
-     * @param familia
-     * @return
+     * @param familia Objeto [Familia] a eliminar.
+     * @return `true` si la eliminación fue exitosa, `false` en caso contrario.
      */
     override fun deleteFamilia(familia: Familia): Boolean {
-        conexion.conectar()
-        val query = "DELETE FROM familia WHERE id = ?"
-        val ps = conexion.getPreparedStatement(query)
-        ps?.setInt(1, familia.id)
-        val result = ps?.executeUpdate()
-        ps?.close()
-        conexion.desconectar()
-        return result == 1
-    }
+        var result = false
 
+        try {
+            conexion.conectar()
+            val query = "DELETE FROM familia WHERE id = ?"
+            val ps = conexion.getPreparedStatement(query)
+            ps?.setInt(1, familia.id)
+            result = ps?.executeUpdate() == 1
+            ps?.close()
+        } catch (e: SQLException) {
+            println(e.message)
+        } finally {
+            conexion.desconectar()
+        }
+
+        return result
+    }
 }

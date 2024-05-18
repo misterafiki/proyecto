@@ -6,7 +6,6 @@ class ConexionBD {
     val password = ""
     var conn: Connection? = null
 
-
     fun conectar() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver")
