@@ -1,4 +1,0 @@
-package logica
-
-class ControladorSesion {
-}
