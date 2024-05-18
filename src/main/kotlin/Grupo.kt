@@ -1,5 +1,9 @@
-enum class Grupo (var valor: String){
-    GRUPO1("GRUPO1"),
-    GRUPO2("GRUPO2"),
-    GRUPO3("GRUPO3")
+class Grupo {
+    var id:Int
+    var nombre:String
+
+    constructor(id: Int, nombre: String) {
+        this.id = id
+        this.nombre = nombre
+    }
 }
