@@ -28,9 +28,10 @@ El proyecto sigue una estructura modular para facilitar su mantenimiento y escal
 
 1. Clona este repositorio en tu máquina local.
 2. Configura y ejecuta XAMPP para iniciar el servidor MySQL local.
-3. Importa los scripts SQL proporcionados en `database/` para crear la base de datos y sus tablas.
+3. Importa los scripts SQL proporcionados en `database/` para crear la base de datos y sus tablas. (Consulta el archivo `database.sql` bajo la sección de [Enlaces Útiles](#enlaces-%C3%BAtiles)).
 4. Configura las credenciales de conexión a la base de datos en el backend de la aplicación.
 5. Ejecuta la aplicación backend y frontend para empezar a utilizarla.
+
 
 ## Contribución
 
@@ -46,6 +47,7 @@ El proyecto sigue una estructura modular para facilitar su mantenimiento y escal
 
 - **[Trello](https://trello.com/invite/b/9xwPp46F/ATTI9007ebdc8fc9700c3a734afb638495afDD246AAD/proyecto-1daw):** Tablero de Trello para la gestión de tareas y seguimiento del proyecto.
 - **[Telegram](https://t.me/+zNppDPkdu3M5OWY8):** Grupo de Telegram para la comunicación y colaboración del equipo de desarrollo.
+- - **[Google Drive](https://drive.google.com/drive/folders/1aqLXmsTsA3HWaBY8KBeBgtDV6fcM6dnE?usp=sharing):** Carpeta en Google Drive con documentación adicional y archivos SQL.
 
 ## Notas Adicionales
 
