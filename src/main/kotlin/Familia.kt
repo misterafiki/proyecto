@@ -12,4 +12,5 @@ class Familia {
         this.id = id
         this.descripcion = descripcion
     }
+
 }
