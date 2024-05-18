@@ -20,7 +20,7 @@ class ControladorIndividuoRol() {
          */
         fun registrar(email: String, pass: String, nombre: String, apellidos: String, familia: Int, rol: Rol) {
             val usuarioNuevo = Individuo(email, pass, nombre, apellidos, familia, rol)
-            usuarioDAO.insertIndividuo(usuarioNuevo)
+            usuarioDAO.insertarIndividuo(usuarioNuevo)
         }
 
         /**
@@ -31,7 +31,7 @@ class ControladorIndividuoRol() {
          * @return Rol del individuo si el inicio de sesión es exitoso, o `null` si no se encuentra o la contraseña es incorrecta.
          */
         fun login(email: String, password: String): Rol? {
-            val usuario = usuarioDAO.getIndividuoByEmail(email)
+            val usuario = usuarioDAO.obtenerIndividuoPorEmail(email)
             var rol: Rol? = null
 
             if (usuario != null && usuario.pass == password) {
@@ -47,7 +47,7 @@ class ControladorIndividuoRol() {
          * @return Lista de objetos [Individuo].
          */
         fun obtenerTodosUsuarios(): List<Individuo> {
-            return usuarioDAO.getAllIndividuos()
+            return usuarioDAO.obtenerTodosIndividuos()
         }
 
         /**
@@ -57,7 +57,7 @@ class ControladorIndividuoRol() {
          * @return Objeto [Individuo] si se encuentra en la base de datos, o `null` si no existe.
          */
         fun obtenerUsuarioPorEmail(email: String): Individuo? {
-            return usuarioDAO.getIndividuoByEmail(email)
+            return usuarioDAO.obtenerIndividuoPorEmail(email)
         }
 
         /**
@@ -67,7 +67,7 @@ class ControladorIndividuoRol() {
          * @return `true` si la eliminación fue exitosa, `false` en caso contrario.
          */
         fun eliminarUsuario(usuario: Individuo): Boolean {
-            return usuarioDAO.deleteIndividuo(usuario)
+            return usuarioDAO.borrarIndividuo(usuario)
         }
 
         /**
@@ -77,7 +77,7 @@ class ControladorIndividuoRol() {
          * @return `true` si la actualización fue exitosa, `false` en caso contrario.
          */
         fun actualizarUsuario(usuario: Individuo): Boolean {
-            return usuarioDAO.updatePassIndividuo(usuario)
+            return usuarioDAO.actualizarPassIndividuo(usuario)
         }
 
         /**
@@ -87,7 +87,7 @@ class ControladorIndividuoRol() {
          * @param nuevoRol Nuevo rol del individuo (PADRE, HIJO, OTRO).
          */
         fun cambiarRol(email: String, nuevoRol: String) {
-            val usuario = usuarioDAO.getIndividuoByEmail(email)
+            val usuario = usuarioDAO.obtenerIndividuoPorEmail(email)
 
             if (usuario != null) {
                 val rolEnum = when (nuevoRol.uppercase(Locale.getDefault())) {
@@ -97,7 +97,7 @@ class ControladorIndividuoRol() {
                     else -> throw IllegalArgumentException("Rol desconocido: $nuevoRol")
                 }
                 usuario.rol = rolEnum
-                usuarioDAO.updateRole(usuario)
+                usuarioDAO.actualizarRol(usuario)
             }
         }
     }

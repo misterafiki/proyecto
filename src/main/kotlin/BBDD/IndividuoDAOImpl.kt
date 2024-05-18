@@ -15,7 +15,7 @@ class IndividuoDAOImpl : IndividuoDAO {
      * @param email Dirección de correo electrónico del individuo.
      * @return Objeto [Individuo] si se encuentra en la base de datos, o `null` si no existe.
      */
-    override fun getIndividuoByEmail(email: String): Individuo? {
+    override fun obtenerIndividuoPorEmail(email: String): Individuo? {
         var individuo: Individuo? = null
 
         try {
@@ -57,7 +57,7 @@ class IndividuoDAOImpl : IndividuoDAO {
      * @param email Dirección de correo electrónico del individuo.
      * @return ID del individuo si se encuentra en la base de datos, o `null` si no existe.
      */
-    override fun getIdByEmail(email: String): Int? {
+    override fun obternerIdPorEmail(email: String): Int? {
         var id: Int? = null
 
         try {
@@ -84,7 +84,7 @@ class IndividuoDAOImpl : IndividuoDAO {
      *
      * @return Lista de objetos [Individuo].
      */
-    override fun getAllIndividuos(): List<Individuo> {
+    override fun obtenerTodosIndividuos(): List<Individuo> {
         val individuos = mutableListOf<Individuo>()
 
         try {
@@ -126,7 +126,7 @@ class IndividuoDAOImpl : IndividuoDAO {
      * @param individuo Objeto [Individuo] a insertar.
      * @return `true` si la inserción fue exitosa, `false` en caso contrario.
      */
-    override fun insertIndividuo(individuo: Individuo): Boolean {
+    override fun insertarIndividuo(individuo: Individuo): Boolean {
         var result = false
 
         try {
@@ -155,7 +155,7 @@ class IndividuoDAOImpl : IndividuoDAO {
      * @param individuo Objeto [Individuo] con la nueva contraseña.
      * @return `true` si la actualización fue exitosa, `false` en caso contrario.
      */
-    override fun updatePassIndividuo(individuo: Individuo): Boolean {
+    override fun actualizarPassIndividuo(individuo: Individuo): Boolean {
         var result = false
 
         try {
@@ -181,7 +181,7 @@ class IndividuoDAOImpl : IndividuoDAO {
      * @param individuo Objeto [Individuo] con el nuevo rol.
      * @return `true` si la actualización fue exitosa, `false` en caso contrario.
      */
-    override fun updateRole(individuo: Individuo): Boolean {
+    override fun actualizarRol(individuo: Individuo): Boolean {
         var result = false
 
         try {
@@ -214,7 +214,7 @@ class IndividuoDAOImpl : IndividuoDAO {
      * @param individuo Objeto [Individuo] a eliminar.
      * @return `true` si la eliminación fue exitosa, `false` en caso contrario.
      */
-    override fun deleteIndividuo(individuo: Individuo): Boolean {
+    override fun borrarIndividuo(individuo: Individuo): Boolean {
         var result = false
 
         try {
@@ -239,7 +239,7 @@ class IndividuoDAOImpl : IndividuoDAO {
      * @param id ID de la familia cuyos individuos se eliminarán.
      * @return `true` si la eliminación fue exitosa, `false` en caso contrario.
      */
-    override fun deleteAllIndividuos(id: Int): Boolean {
+    override fun borrarTodosIndividuos(id: Int): Boolean {
         var result = false
 
         try {

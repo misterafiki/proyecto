@@ -50,7 +50,7 @@ class ControladorFamilia {
          * @return `true` si la eliminación fue exitosa, `false` en caso contrario.
          */
         fun eliminarFamilia(familia: Familia): Boolean {
-            individuoDAOImpl.deleteAllIndividuos(familia.id)
+            individuoDAOImpl.borrarTodosIndividuos(familia.id)
             return familiaDAOImpl.deleteFamilia(familia)
         }
     }
