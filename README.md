@@ -1,7 +1,6 @@
-#
-**Proyecto 1º DAW**
-#
-*Páguina web/programa(kotlin) de sentimientos:*
+# **Proyecto 1º DAW**
+
+##*Páguina web/programa(kotlin) de sentimientos:*
 
 Se pide en el programa que: hay paciente,paciente componen unidades familiares que seran tratadas por grupos de terapeutas (Persona puede ser terapeurta y paciente) los pacientes son atendidos en sesiones mediante metodos, las tecnicas conforman metodos, los metodos son arrays de tecnicas.
 
