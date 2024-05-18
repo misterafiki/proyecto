@@ -27,11 +27,9 @@ Telegram: https://t.me/+zNppDPkdu3M5OWY8
 > [!IMPORTANT]
 > Para el uso del test es necesario instalacion de una dependencias:
 > ```
-> dependencies {
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.1")
+>   testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.1")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.1")
     testImplementation("com.h2database:h2:1.4.200") // Para una base de datos en memoria si es necesario
-}
 > ```
 
 > [!WARNING]
