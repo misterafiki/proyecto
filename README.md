@@ -47,7 +47,7 @@ El proyecto sigue una estructura modular para facilitar su mantenimiento y escal
 
 - **[Trello](https://trello.com/invite/b/9xwPp46F/ATTI9007ebdc8fc9700c3a734afb638495afDD246AAD/proyecto-1daw):** Tablero de Trello para la gestión de tareas y seguimiento del proyecto.
 - **[Telegram](https://t.me/+zNppDPkdu3M5OWY8):** Grupo de Telegram para la comunicación y colaboración del equipo de desarrollo.
-- - **[Google Drive](https://drive.google.com/drive/folders/1aqLXmsTsA3HWaBY8KBeBgtDV6fcM6dnE?usp=sharing):** Carpeta en Google Drive con documentación adicional y archivos SQL.
+-  **[Google Drive](https://drive.google.com/drive/folders/1aqLXmsTsA3HWaBY8KBeBgtDV6fcM6dnE?usp=sharing):** Carpeta en Google Drive con documentación adicional y archivos SQL.
 
 ## Notas Adicionales
 
