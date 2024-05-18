@@ -1,6 +1,7 @@
+##
 **Proyecto 1º DAW**
 
-Páguina web/programa(kotlin) de sentimientos:
+*Páguina web/programa(kotlin) de sentimientos:*
 
 Se pide en el programa que: hay paciente,paciente componen unidades familiares que seran tratadas por grupos de terapeutas (Persona puede ser terapeurta y paciente) los pacientes son atendidos en sesiones mediante metodos, las tecnicas conforman metodos, los metodos son arrays de tecnicas.
 
@@ -27,9 +28,9 @@ Telegram: https://t.me/+zNppDPkdu3M5OWY8
 > [!IMPORTANT]
 > Para el uso del test es necesario instalacion de una dependencias:
 > ```
->   testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.1")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.1")
-    testImplementation("com.h2database:h2:1.4.200") // Para una base de datos en memoria si es necesario
+> testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.1")
+> testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.1")
+> testImplementation("com.h2database:h2:1.4.200") // Para una base de datos en memoria si es necesario
 > ```
 
 > [!WARNING]
