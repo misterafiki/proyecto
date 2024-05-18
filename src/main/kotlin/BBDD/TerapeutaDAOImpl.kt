@@ -5,19 +5,23 @@ import Metodologia
 import Terapeuta
 
 /**
- * Terapeuta d a o impl
+ * Implementación de TerapeutaDAO para gestionar las operaciones CRUD de la entidad Terapeuta en la base de datos.
  *
- * @constructor Create empty Terapeuta d a o impl
+ * @constructor Crea una instancia de TerapeutaDAOImpl.
  */
 class TerapeutaDAOImpl : TerapeutaDAO {
 
     private val conexion = ConexionBD()
 
     /**
-     * Get terapeuta by email
+     * Obtiene un terapeuta por su correo electrónico.
      *
-     * @param email
-     * @return
+     * Esta función se conecta a la base de datos, ejecuta una consulta para encontrar
+     * un terapeuta con el correo electrónico especificado y devuelve el terapeuta encontrado,
+     * o `null` si no se encuentra ningún terapeuta con ese correo.
+     *
+     * @param email El correo electrónico del terapeuta a buscar.
+     * @return El terapeuta con el correo electrónico especificado, o `null` si no se encuentra.
      */
     override fun getTerapeutaByEmail(email: String): Terapeuta? {
         conexion.conectar()
@@ -35,10 +39,14 @@ class TerapeutaDAOImpl : TerapeutaDAO {
     }
 
     /**
-     * Get id by email
+     * Obtiene el ID de un terapeuta por su correo electrónico.
      *
-     * @param email
-     * @return
+     * Esta función se conecta a la base de datos, ejecuta una consulta para encontrar
+     * el ID de un terapeuta con el correo electrónico especificado y devuelve el ID encontrado,
+     * o `null` si no se encuentra ningún terapeuta con ese correo.
+     *
+     * @param email El correo electrónico del terapeuta a buscar.
+     * @return El ID del terapeuta con el correo electrónico especificado, o `null` si no se encuentra.
      */
     override fun getIdByEmail(email: String): Int? {
         conexion.conectar()
@@ -46,7 +54,7 @@ class TerapeutaDAOImpl : TerapeutaDAO {
         val ps = conexion.getPreparedStatement(query)
         ps?.setString(1, email)
         val rs = ps?.executeQuery()
-        var id: Int? =0
+        var id: Int? = null
         if (rs?.next() == true) {
             id = rs.getInt("id")
         }
@@ -56,33 +64,40 @@ class TerapeutaDAOImpl : TerapeutaDAO {
     }
 
     /**
-     * Get all terapeuta
+     * Obtiene una lista de todos los terapeutas.
      *
-     * @return
+     * Esta función se conecta a la base de datos, ejecuta una consulta para obtener todos los terapeutas
+     * y devuelve una lista de objetos `Terapeuta` que representan a cada terapeuta en la base de datos.
+     *
+     * @return Una lista de todos los terapeutas en la base de datos.
      */
     override fun getAllTerapeuta(): List<Terapeuta> {
         conexion.conectar()
         val query = "SELECT * FROM terapeuta"
         val st = conexion.getStatement()
         val rs = st?.executeQuery(query)
-        val usuario = arrayListOf<Terapeuta>()
+        val usuarios = arrayListOf<Terapeuta>()
         while (rs?.next() == true) {
-            usuario.add(Terapeuta(rs.getString("email"), rs.getString("pass"), rs.getString("nombre")))
+            usuarios.add(Terapeuta(rs.getString("email"), rs.getString("pass"), rs.getString("nombre")))
         }
         st?.close()
         conexion.desconectar()
-        return usuario
+        return usuarios
     }
 
     /**
-     * Insert terapeuta
+     * Inserta un nuevo terapeuta en la base de datos.
      *
-     * @param usuario
-     * @return
+     * Esta función se conecta a la base de datos, ejecuta una consulta para insertar un nuevo
+     * terapeuta con los detalles proporcionados y devuelve un valor booleano que indica si
+     * la inserción fue exitosa.
+     *
+     * @param usuario El objeto `Terapeuta` que contiene los detalles del terapeuta a insertar.
+     * @return `true` si la inserción fue exitosa, `false` en caso contrario.
      */
     override fun insertTerapeuta(usuario: Terapeuta): Boolean {
         conexion.conectar()
-        val query = "INSERT INTO terapeuta (email,pass, nombre,grupo,metodologia ) VALUES (?,?,?,?,?)"
+        val query = "INSERT INTO terapeuta (email, pass, nombre, grupo, metodologia) VALUES (?,?,?,?,?)"
         val ps = conexion.getPreparedStatement(query)
         ps?.setString(1, usuario.email)
         ps?.setString(2, usuario.pass)
@@ -96,10 +111,14 @@ class TerapeutaDAOImpl : TerapeutaDAO {
     }
 
     /**
-     * Update terapeuta
+     * Actualiza la contraseña de un terapeuta en la base de datos.
      *
-     * @param usuario
-     * @return
+     * Esta función se conecta a la base de datos, ejecuta una consulta para actualizar la contraseña
+     * de un terapeuta identificado por su correo electrónico y devuelve un valor booleano que indica
+     * si la actualización fue exitosa.
+     *
+     * @param usuario El objeto `Terapeuta` que contiene el correo electrónico y la nueva contraseña del terapeuta.
+     * @return `true` si la actualización fue exitosa, `false` en caso contrario.
      */
     override fun updateTerapeuta(usuario: Terapeuta): Boolean {
         conexion.conectar()
@@ -114,43 +133,26 @@ class TerapeutaDAOImpl : TerapeutaDAO {
     }
 
 
+
     /**
-     * Update grupo
+     * Actualiza el grupo de un terapeuta en la base de datos.
      *
-     * @param usuario
-     * @return
+     * Esta función se conecta a la base de datos, ejecuta una consulta para actualizar el grupo
+     * de un terapeuta identificado por su correo electrónico y devuelve un valor booleano que indica
+     * si la actualización fue exitosa.
+     *
+     * @param usuario El objeto `Terapeuta` que contiene el correo electrónico y el nuevo grupo del terapeuta.
+     *                No debe ser nulo.
+     * @return `true` si la actualización fue exitosa, `false` en caso contrario.
+     * @throws IllegalArgumentException si el parámetro `usuario` es nulo.
      */
     override fun updateGrupo(usuario: Terapeuta?): Boolean {
+        requireNotNull(usuario) { "El parámetro usuario no puede ser nulo" }
+
         conexion.conectar()
         val query = "UPDATE terapeuta SET grupo = ? WHERE email = ?"
         val ps = conexion.getPreparedStatement(query)
-        ps?.setInt(1,usuario?.grupo!!)
-        ps?.setString(2, usuario?.email)
-        val result = ps?.executeUpdate()
-        ps?.close()
-        conexion.desconectar()
-        return result == 1
-    }
-
-    /**
-     * Update metodo
-     *
-     * @param usuario
-     * @return
-     */
-    override fun updateMetodo(usuario: Terapeuta): Boolean {
-        conexion.conectar()
-        var metpaux = usuario.metodologia
-        val metodo = when (metpaux) {
-            // llama a la enum de metodologias
-             Metodologia.METODO1 -> "METODO1"
-             Metodologia.METODO2 -> "METODO2"
-             Metodologia.METODO3 -> "METODO3"
-            else -> throw IllegalArgumentException("Metodologia desconocido: $metpaux")
-        }
-        val query = "UPDATE terapeuta SET metodologia = ? WHERE email = ?"
-        val ps = conexion.getPreparedStatement(query)
-        ps?.setString(1,metodo)
+        ps?.setInt(1, usuario.grupo)
         ps?.setString(2, usuario.email)
         val result = ps?.executeUpdate()
         ps?.close()
@@ -158,11 +160,46 @@ class TerapeutaDAOImpl : TerapeutaDAO {
         return result == 1
     }
 
+
     /**
-     * Delete terapeuta
+     * Actualiza la metodología de un terapeuta en la base de datos.
      *
-     * @param usuario
-     * @return
+     * Esta función se conecta a la base de datos, ejecuta una consulta para actualizar la metodología
+     * de un terapeuta identificado por su correo electrónico y devuelve un valor booleano que indica
+     * si la actualización fue exitosa.
+     *
+     * @param usuario El objeto `Terapeuta` que contiene el correo electrónico y la nueva metodología del terapeuta.
+     * @return `true` si la actualización fue exitosa, `false` en caso contrario.
+     * @throws IllegalArgumentException si la metodología proporcionada no es válida.
+     */
+    override fun updateMetodo(usuario: Terapeuta): Boolean {
+        conexion.conectar()
+        val metodo = when (usuario.metodologia) {
+            Metodologia.METODO1 -> "METODO1"
+            Metodologia.METODO2 -> "METODO2"
+            Metodologia.METODO3 -> "METODO3"
+            else -> throw IllegalArgumentException("Metodología desconocida: ${usuario.metodologia}")
+        }
+        val query = "UPDATE terapeuta SET metodologia = ? WHERE email = ?"
+        val ps = conexion.getPreparedStatement(query)
+        ps?.setString(1, metodo)
+        ps?.setString(2, usuario.email)
+        val result = ps?.executeUpdate()
+        ps?.close()
+        conexion.desconectar()
+        return result == 1
+    }
+
+
+    /**
+     * Elimina un terapeuta de la base de datos.
+     *
+     * Esta función se conecta a la base de datos, ejecuta una consulta para eliminar un terapeuta
+     * identificado por su correo electrónico y devuelve un valor booleano que indica si la eliminación
+     * fue exitosa.
+     *
+     * @param usuario El objeto `Terapeuta` que contiene el correo electrónico del terapeuta a eliminar.
+     * @return `true` si la eliminación fue exitosa, `false` en caso contrario.
      */
     override fun deleteTerapeuta(usuario: Terapeuta): Boolean {
         conexion.conectar()
@@ -174,5 +211,6 @@ class TerapeutaDAOImpl : TerapeutaDAO {
         conexion.desconectar()
         return result == 1
     }
+
 
 }
