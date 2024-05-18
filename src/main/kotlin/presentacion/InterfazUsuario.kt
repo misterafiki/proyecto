@@ -121,6 +121,7 @@ class InterfazUsuario{
                 )
                 val option = readLine()?.toIntOrNull()
 
+
                 when (option) {
                     1 -> aniadirTerapeuta()
                     2 -> modificarGrupoTerapeuta()
