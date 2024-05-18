@@ -16,6 +16,8 @@ Trello: https://trello.com/invite/b/9xwPp46F/ATTI9007ebdc8fc9700c3a734afb638495a
 Telegram: https://t.me/+zNppDPkdu3M5OWY8
 
 ```
+
+```
 > [!NOTE]
 > Useful information that users should know, even when skimming content.
 
@@ -31,4 +33,3 @@ Telegram: https://t.me/+zNppDPkdu3M5OWY8
 > [!CAUTION]
 > Advises about risks or negative outcomes of certain actions.
 >
-```
