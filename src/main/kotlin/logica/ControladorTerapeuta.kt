@@ -43,6 +43,6 @@ class ControladorTerapeuta () {
             return TerapeuraDAO.updateGrupo(usuario)
         }
 
-    
+
     }
 }
