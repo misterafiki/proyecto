@@ -6,4 +6,9 @@ class Grupo {
         this.id = id
         this.nombre = nombre
     }
+
+    override fun toString(): String {
+        return "Grupo(id=$id, nombre='$nombre')"
+    }
+
 }

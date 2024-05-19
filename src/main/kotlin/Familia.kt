@@ -13,4 +13,8 @@ class Familia {
         this.descripcion = descripcion
     }
 
+    override fun toString(): String {
+        return "Familia(id=$id, descripcion='$descripcion')"
+    }
+
 }

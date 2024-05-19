@@ -23,5 +23,14 @@
     <orderEntry type="library" name="h2database.h2" level="project" />
     <orderEntry type="library" scope="TEST" name="junit.jupiter.api" level="project" />
     <orderEntry type="library" name="junit.jupiter.engine" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../Programación/3Eva/T7 BBDD/mysql-connector-j-8.0.32.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>

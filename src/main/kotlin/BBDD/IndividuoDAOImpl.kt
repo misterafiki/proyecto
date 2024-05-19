@@ -131,13 +131,14 @@ class IndividuoDAOImpl : IndividuoDAO {
 
         try {
             conexion.conectar()
-            val query = "INSERT INTO individuo (email, nombre, apellidos, familia, rol) VALUES (?, ?, ?, ?, ?)"
+            val query = "INSERT INTO individuo (email, pass, nombre, apellidos, familia, rol) VALUES (?, ?, ?, ?, ?, ?)"
             val ps = conexion.getPreparedStatement(query)
             ps?.setString(1, individuo.email)
-            ps?.setString(2, individuo.nombre)
-            ps?.setString(3, individuo.apellidos)
-            ps?.setInt(4, individuo.familia)
-            ps?.setString(5, individuo.rol.toString())
+            ps?.setString(2, individuo.pass)
+            ps?.setString(3, individuo.nombre)
+            ps?.setString(4, individuo.apellidos)
+            ps?.setInt(5, individuo.familia)
+            ps?.setString(6, individuo.rol.toString())
             result = ps?.executeUpdate() == 1
             ps?.close()
         } catch (e: SQLException) {

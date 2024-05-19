@@ -33,4 +33,9 @@ class Sesion {
     }
 
 
+    override fun toString(): String {
+        return "Sesion(id=$id, familia=$familia, grupo=$grupo, emocion=$emocion)"
+    }
+
+
 }
