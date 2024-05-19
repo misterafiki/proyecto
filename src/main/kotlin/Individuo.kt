@@ -10,7 +10,7 @@
  */
 class Individuo {
     val email: String
-    val pass: String
+    var pass: String
     val nombre: String?
     val apellidos: String?
     val familia: Int

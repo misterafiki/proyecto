@@ -1,3 +1,4 @@
+import BBDD.GrupoDAOImpl
 import logica.ControladorFamilia
 import logica.ControladorTerapeuta
 
@@ -155,21 +156,37 @@ class InterfazUsuario{
 private fun registrar(){
     println("Ingrese los datos del usuario:")
     print("Email: ")
-    val email = readLine() ?: ""
+    val email = readlnOrNull() ?: ""
     print("Contraseña: ")
-    val pass = readLine() ?: ""
+    val pass = readlnOrNull() ?: ""
     print("Nombre: ")
-    val nombre = readLine() ?: ""
+    val nombre = readlnOrNull() ?: ""
     print("Apellidos: ")
-    val apellidos = readLine() ?: ""
+    val apellidos = readlnOrNull() ?: ""
     print("Familia: ")
-    val familia = readLine() ?: ""
+    val familia = readlnOrNull()?.toIntOrNull()
     print("Rol: ")
-    val rol = readLine() ?: ""
+    val rol = eligeRol()
 
-    ControladorIndividuoRol.registrar(email, pass, nombre, apellidos, familia, rol)
+    ControladorIndividuoRol.registrar(email, pass, nombre, apellidos, familia!!, rol)
     println("Usuario registrado exitosamente.")
 
+}
+
+fun eligeRol(): Rol {
+    println("Elige de entre los siguientes, cual es tu rol:\n [1] PADRE\n [2] HIJO\n [3] OTRO")
+    val OPCION = readln().toIntOrNull()
+    var rol = Rol.OTRO
+    do {
+        when (OPCION) {
+            1 -> rol = Rol.PADRE
+            2 -> rol = Rol.HIJO
+            3 -> rol = Rol.OTRO
+            else -> println ("opción no valida")
+        }
+    }while (OPCION ==null || OPCION > 3 || OPCION <0)
+
+return rol
 }
 
 /**
@@ -180,17 +197,13 @@ private fun registrar(){
 private fun registrarTerapeuta(){
     println("Ingrese los datos del terapeuta:")
     print("Email: ")
-    val email = readLine() ?: ""
+    val email = readlnOrNull() ?: ""
     print("Contraseña: ")
-    val pass = readLine() ?: ""
+    val pass = readlnOrNull() ?: ""
     print("Nombre: ")
-    val nombre = readLine() ?: ""
-    print("Grupo: ")
-    val grupo = readLine() ?: ""  // antes así: readlnOrNull()?.toIntOrNull()?: 0
-    print("Metodología: ")
-    val metodologia = readLine() ?: ""
+    val nombre = readlnOrNull() ?: ""
 
-    ControladorTerapeuta.registrar(email, pass, nombre, grupo, metodologia)
+    ControladorTerapeuta.registrar(email, pass, nombre)
     println("Terapeuta registrado exitosamente.")
 }
 /**
@@ -204,8 +217,8 @@ private fun login() {
     print("Contraseña: ")
     val password = readLine().orEmpty()
 
-    if (ControladorUsuario.login(email, password)){
-        if (Rol != null) InterfazUsuario.menuUsuario()
+    if (ControladorIndividuoRol.login(email, password) !=null){
+        InterfazUsuario.menuUsuario()
     }
     else if (ControladorTerapeuta.login(email,password)){
         InterfazUsuario.menuTerapeuta()
@@ -224,23 +237,23 @@ private fun aniadirIndividuo() {
     println("Ingrese los datos del usuario, terapeutilla de los cojones:")
     val email = pedirMail()
     print("Contraseña: ")
-    val pass = readLine() ?: ""
+    val pass = readlnOrNull() ?: ""
     print("Nombre: ")
-    val nombre = readLine() ?: ""
+    val nombre = readlnOrNull() ?: ""
     print("Apellidos: ")
-    val apellidos = readLine() ?: ""
+    val apellidos = readlnOrNull() ?: ""
     print("Familia: ")
-    val familia = readLine() ?: ""
+    val familia = readlnOrNull()?.toIntOrNull()
     print("Rol: ")
-    val rol = readLine() ?: ""
+    val rol = eligeRol()
 
-    ControladorIndividuoRol.registrar(email, pass, nombre, apellidos, familia, rol)
+    ControladorIndividuoRol.registrar(email, pass, nombre, apellidos, familia!!, rol)
     println("Terapeuta registrado exitosamente.")
 }
 
 private fun pedirMail(): String {
     print("Email: ")
-    val email = readLine() ?: ""
+    val email = readlnOrNull() ?: ""
     return email
 }
 
@@ -260,7 +273,7 @@ private fun mostrarUsuarios() {
  */
 private fun buscarUsuarioPorEmail() {
     print("Ingrese el email del usuario a buscar: ")
-    val email = readLine() ?: ""
+    val email = readlnOrNull() ?: ""
     val usuario = ControladorIndividuoRol.obtenerUsuarioPorEmail(email)
     if (usuario != null) {
         println("Usuario encontrado: $usuario")
@@ -275,7 +288,7 @@ private fun buscarUsuarioPorEmail() {
  */
 private fun borrarIndividuo() {
     print("Ingrese el email del usuario a borrar: ")
-    val email = readLine() ?: ""
+    val email = readlnOrNull() ?: ""
     val usuario = ControladorIndividuoRol.obtenerUsuarioPorEmail(email)
     if (usuario != null) {
         ControladorIndividuoRol.eliminarUsuario(usuario)
@@ -292,7 +305,7 @@ private fun borrarIndividuo() {
  */
 private fun modificarPassIndividuo() {
     print("Ingrese el email del usuario a modificar: ")
-    val email = readLine() ?: ""
+    val email = readlnOrNull() ?: ""
     val usuario = ControladorIndividuoRol.obtenerUsuarioPorEmail(email)
     if (usuario != null) {
         print("Ingrese la nueva pass: ")
@@ -312,13 +325,13 @@ private fun modificarPassIndividuo() {
  */
 private fun modificarRolIndividuo() {
     print("Ingrese el email del usuario a modificar: ")
-    val email = readLine() ?: ""
+    val email = readlnOrNull() ?: ""
     val usuario = ControladorIndividuoRol.obtenerUsuarioPorEmail(email)
     if (usuario != null) {
         print("Seleccione nuevo rol: ")
-        val nuevoRol = readLine()?: ""
-        usuario.Rol = nuevoRol
-        ControladorIndividuoRol.cambiarRol(email, nuevoRol)
+        val nuevoRol = eligeRol()
+        val valorNuevoRol =nuevoRol.valor
+        ControladorIndividuoRol.cambiarRol(email, valorNuevoRol)
         println("Rol modificado correctamente.")
     } else {
         println("No se encontró ningún usuario con el email proporcionado.")
@@ -333,9 +346,9 @@ private fun modificarRolIndividuo() {
  */
 private fun registrarFamilia(){
     println ("Inserte nueva ID")
-    var id = readlnOrNull()?:0
+    val id = readln().toInt()
     println ("Inserte descripción de la familia")
-    var descripcion= readlnOrNull()?:""
+    val descripcion= readlnOrNull()?:""
     ControladorFamilia.registrar(id,descripcion)
 }
 /**
@@ -353,8 +366,13 @@ private fun mostrarFamilias(){
  * Luego, llama al controlador correspondiente para actualizar la familia.
  */
 private fun modificarFamilia(){
+    val seleccion = ControladorFamilia.obtenerFamilias()
+    for (i in seleccion){
+        println(i)
+    }
+    var familia=Familia(0,"")
     println("Inserte id de familia a borrar: ")
-    var id = readlnOrNull()?:0
+    var id = readln().toInt()
     println("Inserte descripcion de familia a borrar: ")
     var descripcion = readlnOrNull()?:""
     familia.id = id
@@ -367,11 +385,15 @@ private fun modificarFamilia(){
  * Luego, llama al controlador correspondiente para eliminar la familia.
  */
 private fun borrarFamilia(){
+    var seleccion = ControladorFamilia.obtenerFamilias()
+    for (i in seleccion){
+        println(i)
+    }
+    var familia=Familia(0,"")
     println("Inserte id de familia a borrar: ")
-    var id = readlnOrNull()?:0
+    var id = readln().toInt()
     println("Inserte descripcion de familia a borrar: ")
     var descripcion = readlnOrNull()?:""
-    var familia = Familia()
     familia.id = id
     familia.descripcion = descripcion
     ControladorFamilia.eliminarFamilia(familia)
@@ -386,17 +408,17 @@ private fun borrarFamilia(){
 private fun aniadirTerapeuta(){
     println("Ingrese los datos del terapeuta:")
     print("Email: ")
-    val email = readLine() ?: ""
+    val email = readlnOrNull() ?: ""
     print("Contraseña: ")
-    val pass = readLine() ?: ""
+    val pass = readlnOrNull() ?: ""
     print("Nombre: ")
-    val nombre = readLine() ?: ""
+    val nombre = readlnOrNull() ?: ""
     print("Grupo: ")
-    val grupo = readLine() ?: ""  // antes así: readlnOrNull()?.toIntOrNull()?: 0
-    print("Metodología: ")
-    val metodologia = readLine() ?: ""
+//    val grupo = readlnOrNull() ?: ""  // antes así: readlnOrNull()?.toIntOrNull()?: 0
+//    print("Metodología: ")
+//    val metodologia = readlnOrNull() ?: ""
 
-    ControladorTerapeuta.registrar(email, pass, nombre, grupo, metodologia)
+    ControladorTerapeuta.registrar(email, pass, nombre)
     println("Terapeuta registrado exitosamente.")
 }
 /**
@@ -406,12 +428,26 @@ private fun aniadirTerapeuta(){
  */
 private fun modificarGrupoTerapeuta(){
     print("Ingrese el email del terapeuta a buscar: ")
-    val email = readLine() ?: ""
+    val email = readlnOrNull() ?: ""
     val terapeuta = ControladorTerapeuta.obtenerTerapeuraPorEmail(email)
+    var index = false
     if (terapeuta != null) {
-        print("Ingrese el nuevo grupo del terapeuta: ")
-        var grupo = readlnOrNull()?.toIntOrNull()
-        ControladorTerapeuta.cambiarGrupo(email, grupo)
+        do {
+            print("Asigne grupo al terapeuta: ")
+            var a = GrupoDAOImpl().getAllGrupo()
+
+            for (i in a) {
+                println("$i \n")
+            }
+            var grupo = readln().toInt()
+            for (i in a) {
+                if (grupo == i.id) {
+                    index = true
+                    ControladorTerapeuta.cambiarGrupo(email, grupo)
+                } else println("El grupo no existe")
+
+            }
+        }while (!index)
     }
 }
 /**
@@ -421,12 +457,22 @@ private fun modificarGrupoTerapeuta(){
  */
 private fun modificarMetodoTerapeuta(){
     print("Ingrese el email del terapeuta a buscar: ")
-    val email = readLine() ?: ""
+    val email = readlnOrNull() ?: ""
     val terapeuta = ControladorTerapeuta.obtenerTerapeuraPorEmail(email)
+    var metodologia = ""
     if (terapeuta != null) {
-        print("Ingrese el nueva metodología del terapeuta: ")
-        var metodologia = readlnOrNull()?:""
-        ControladorTerapeuta.cambiarGrupo(email, metodologia)
+        for (i in Metodologia.entries){
+            println(i.valor)
+        }
+        do {print("Ingrese:\n [1] METODO1 \n [2] METODO2 \n [3] METODO3")
+        var opcion = readlnOrNull()?.toIntOrNull()
+        when (opcion){
+            1 ->metodologia=Metodologia.METODO1.valor
+            2 ->metodologia=Metodologia.METODO2.valor
+            3 ->metodologia=Metodologia.METODO3.valor
+        }
+        }while (opcion == null ||opcion<1 || opcion >3)
+        ControladorTerapeuta.cambiarMetodo(email, metodologia)
     }
 }
 /**
@@ -436,7 +482,7 @@ private fun modificarMetodoTerapeuta(){
  */
 private fun eliminarTerapeuta(){
     print("Ingrese el email del terapeuta a buscar: ")
-    val email = readLine() ?: ""
+    val email = readlnOrNull() ?: ""
     val terapeuta = ControladorTerapeuta.obtenerTerapeuraPorEmail(email)
     if (terapeuta != null) {
         ControladorTerapeuta.eliminarTerapeura(terapeuta)
@@ -461,7 +507,7 @@ private fun mostrarTerapeutas(){
  */
 private fun buscarTerapeutaPorEmail(){
     print("Ingrese el email del terapeuta a buscar: ")
-    val email = readLine() ?: ""
+    val email = readlnOrNull() ?: ""
     val terapeuta = ControladorTerapeuta.obtenerTerapeuraPorEmail(email)
     if (terapeuta != null) {
         println("Terapeuta encontrado: $terapeuta")

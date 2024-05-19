@@ -14,11 +14,14 @@ class ControladorTerapeuta () {
             TerapeuraDAO.insertTerapeuta(usuarioNuevo)
         }
 
-        fun login(email: String, password: String) {
+        fun login(email: String, password: String):Boolean {
             val usuario = TerapeuraDAO.getTerapeutaByEmail(email)
+            var usuarioEsCorrecto = false
             if (usuario != null && usuario.pass == password) {
+                usuarioEsCorrecto= true
 
             }
+            return usuarioEsCorrecto
         }
 
         fun obtenerTodosTerapeuras(): List<Terapeuta> {
