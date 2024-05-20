@@ -128,7 +128,7 @@ class InterfazUsuario {
             while (seguir) {
                 println(
                     "[1] Añadir terapeuta\n" +
-                            "[2] Asignar al terapeuta\n" +
+                            "[2] Asignar grupo al terapeuta\n" +
                             "[3] Asignar metodología al terapeuta\n" +
                             "[4] Eliminar terapeuta\n" +
                             "[5] Mostrar terapeutas\n" +
