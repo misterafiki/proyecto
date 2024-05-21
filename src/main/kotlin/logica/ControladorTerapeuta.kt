@@ -50,9 +50,9 @@ class ControladorTerapeuta () {
                 val usuario = TerapeuraDAO.getTerapeutaByEmail(email)
                 usuario?.let {
                     val metoEnum = when (nuevoMeto.uppercase(Locale.getDefault())) {
-                        "METO1" -> Metodologia.METODO1
-                        "METO2" -> Metodologia.METODO2
-                        "METO3" -> Metodologia.METODO3
+                        "METODO1" -> Metodologia.METODO1
+                        "METODO2" -> Metodologia.METODO2
+                        "METODO3" -> Metodologia.METODO3
                         else -> throw IllegalArgumentException("Metodologia desconocido: $nuevoMeto")
                     }
                     it.metodologia = metoEnum
