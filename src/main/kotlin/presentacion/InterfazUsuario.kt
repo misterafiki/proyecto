@@ -254,7 +254,7 @@ class InterfazUsuario {
          * Luego, llama al controlador correspondiente para registrar al individuo.
          */
         private fun aniadirIndividuo() {
-            println("Ingrese los datos del usuario, terapeutilla de los cojones:")
+            println("Ingrese los datos del individuo a añadir:")
             val email = pedirMail()
             print("Contraseña: ")
             val pass = readlnOrNull() ?: ""
